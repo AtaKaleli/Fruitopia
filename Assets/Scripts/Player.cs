@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
 {
 
     private Rigidbody2D rb;
+    private Animator anim;
 
     [Header("Player Movements")]
     [SerializeField] private float moveSpeed;
@@ -24,6 +25,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
         canDoubleJump = true;
     }
 
@@ -37,13 +39,23 @@ public class Player : MonoBehaviour
             JumpController();
         }
 
+
+
+        AnimationController();
+    }
+
+    private void AnimationController()
+    {
+        anim.SetFloat("xVelocity", rb.velocity.x);
+        anim.SetFloat("yVelocity", rb.velocity.y);
+        anim.SetBool("isGrounded", isGrounded);
     }
 
     private void JumpController()
     {
         if (isGrounded)
         {
-            Jump(1);
+            Jump(1.0f);
             canDoubleJump = true;
         }
         else
