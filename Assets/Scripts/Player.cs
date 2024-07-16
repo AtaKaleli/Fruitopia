@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -6,14 +5,16 @@ public class Player : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
 
-    private bool canDoubleJump;
-    private bool isFacingRight;
-    private int facingDirection;
-    private bool canMove;
+
 
     [Header("Player Forces")]
     [SerializeField] private float speed;
     [SerializeField] private float jumpForce;
+
+    private bool canMove = true;
+    private bool canDoubleJump = true;
+    private bool isFacingRight = true;
+    private int facingDirection = 1;
 
     [Header("Collision Checks - Ground")]
     [SerializeField] private Transform groundCheck;
@@ -33,24 +34,24 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        canMove = true;
-        canDoubleJump = true;
-        isFacingRight = true;
-        facingDirection = 1;
+
     }
 
 
     void Update()
     {
 
-        if (isGrounded)
+        if (isGrounded || isWallSliding)
         {
             canDoubleJump = true;
             canMove = true;
+
         }
 
-        
-        Move();
+        if (canMove)
+        {
+            Move();
+        }
 
         CollisionChecks();
         AnimationController();
@@ -62,6 +63,7 @@ public class Player : MonoBehaviour
             JumpController();
 
         }
+
 
 
 
@@ -81,11 +83,11 @@ public class Player : MonoBehaviour
         isGrounded = Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckRadius, whatIsGround);
         isWallDetected = Physics2D.Raycast(wallCheck.position, Vector2.right * facingDirection, wallCheckRadius, whatIsWall);
 
-        
+
 
     }
 
-    
+
 
     private void WallSlideController()
     {
@@ -105,7 +107,7 @@ public class Player : MonoBehaviour
         if (isWallSliding || isGrounded)
         {
             Jump(jumpForce);
-            canDoubleJump = true;
+
         }
         else
         {
@@ -124,13 +126,8 @@ public class Player : MonoBehaviour
 
     private void Move()
     {
-
-        if (canMove)
-        {
-            float horizontalInput = Input.GetAxisRaw("Horizontal");
-            rb.velocity = new Vector2(horizontalInput * speed, rb.velocity.y);
-        }
-
+        float horizontalInput = Input.GetAxisRaw("Horizontal");
+        rb.velocity = new Vector2(horizontalInput * speed, rb.velocity.y);
     }
 
     void FlipController()
