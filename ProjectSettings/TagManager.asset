@@ -47,6 +47,9 @@ TagManager:
   - name: Ground
     uniqueID: 208993625
     locked: 0
+  - name: Platform-Trap
+    uniqueID: 155486769
+    locked: 0
   - name: Enemy
     uniqueID: 2819780905
     locked: 0
