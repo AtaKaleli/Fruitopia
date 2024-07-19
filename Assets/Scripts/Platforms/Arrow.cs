@@ -22,6 +22,7 @@ public class Arrow : MonoBehaviour
         if(collision.GetComponent<Player>() != null)
         {
             Rigidbody2D playerRb = collision.GetComponent<Rigidbody2D>();
+            collision.GetComponent<Player>().setCanMove(false);
             playerRb.velocity = arrowForce;
             anim.SetTrigger("gotHit");
         }

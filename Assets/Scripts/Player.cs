@@ -143,6 +143,11 @@ public class Player : MonoBehaviour
         isFacingRight = !isFacingRight;
         facingDirection = facingDirection * -1;
     }
+
+    public void setCanMove(bool status)
+    {
+        canMove = status;
+    }
     private void OnDrawGizmos()
     {
         Gizmos.DrawLine(groundCheck.position, new Vector3(groundCheck.position.x, groundCheck.position.y - groundCheckRadius, groundCheck.position.z));
