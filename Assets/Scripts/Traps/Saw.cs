@@ -38,15 +38,19 @@ public class Saw : Damage
 
     private void SawController()
     {
+        
         if(isWorking)
             transform.position = Vector3.MoveTowards(transform.position, movePoints[movePointIndex].position, moveSpeed * Time.deltaTime);
         
+        //if the distance of position between transform and next transform is less than a very small value, then this means saw reached the other point.
         if (Vector2.Distance(transform.position, movePoints[movePointIndex].position) < 0.1f)
         {
             isWorking = false;
             idleTimeCounter = idleTime;
             movePointIndex++;
             Flip();
+
+            //if movePointIndex reaches the length of the points, then basically set the index to 0
             if (movePointIndex == movePoints.Length)
                 movePointIndex = 0;
         }
