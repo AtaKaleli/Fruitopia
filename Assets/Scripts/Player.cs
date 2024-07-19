@@ -144,7 +144,7 @@ public class Player : MonoBehaviour
         facingDirection = facingDirection * -1;
     }
 
-    public void setCanMove(bool status)
+    public void SetCanMove(bool status)
     {
         canMove = status;
     }
