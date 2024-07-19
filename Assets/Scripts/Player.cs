@@ -148,6 +148,7 @@ public class Player : MonoBehaviour
     {
         canMove = status;
     }
+
     private void OnDrawGizmos()
     {
         Gizmos.DrawLine(groundCheck.position, new Vector3(groundCheck.position.x, groundCheck.position.y - groundCheckRadius, groundCheck.position.z));
