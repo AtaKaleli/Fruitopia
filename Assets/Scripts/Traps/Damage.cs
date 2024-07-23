@@ -10,7 +10,8 @@ public class Damage : MonoBehaviour
     {
         if(collision.GetComponent<Player>()!= null)
         {
-            print("player got damaged");
+            Player player = collision.GetComponent<Player>();
+            player.KnockBack();
         }
     }
 }

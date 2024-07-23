@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -10,6 +11,14 @@ public class Player : MonoBehaviour
     [Header("Player Forces")]
     [SerializeField] private float speed;
     [SerializeField] private float jumpForce;
+
+    [Header("Knockback Information")]
+    [SerializeField] private float knockBackTime;
+    [SerializeField] private Vector2 knockBackDirection;
+    private bool isKnocked;
+    [SerializeField] private float untouchableTime;
+    private bool canBeKnockable = true;
+
 
     private bool canMove = true;
     private bool canDoubleJump = true;
@@ -40,6 +49,8 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if (isKnocked)
+            return;
 
         if (isGrounded || isWallSliding)
         {
@@ -75,7 +86,7 @@ public class Player : MonoBehaviour
         anim.SetFloat("yVelocity", rb.velocity.y);
         anim.SetBool("isGrounded", isGrounded);
         anim.SetBool("isWallSliding", isWallSliding);
-
+         
     }
 
     private void CollisionChecks()
@@ -148,6 +159,26 @@ public class Player : MonoBehaviour
     {
         canMove = status;
     }
+
+    public void KnockBack()
+    {
+        if(canBeKnockable)
+            StartCoroutine(KnockbackController());
+    }
+
+    IEnumerator KnockbackController()
+    {
+        isKnocked = true;
+        canBeKnockable = false;
+        anim.SetTrigger("isKnocked");
+        rb.velocity = new Vector2(knockBackDirection.x * -facingDirection , knockBackDirection.y);
+        yield return new WaitForSeconds(knockBackTime);
+        isKnocked = false;
+        canBeKnockable = true;
+    }
+
+  
+   
 
     private void OnDrawGizmos()
     {
