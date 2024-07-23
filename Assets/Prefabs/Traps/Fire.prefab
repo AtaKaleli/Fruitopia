@@ -136,3 +136,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   workingTime: 2
+  hasConnectedSwitcher: 1
