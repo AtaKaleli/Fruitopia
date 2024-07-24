@@ -52,6 +52,8 @@ public class Enemy : Damage
 
     }
 
+   
+
     protected virtual void Move(float xVelocity, float yVelocity)
     {
         rb.velocity = new Vector2(xVelocity, yVelocity);
@@ -78,9 +80,15 @@ public class Enemy : Damage
         Gizmos.DrawLine(groundCheck.position, new Vector3(groundCheck.position.x, groundCheck.position.y - groundCheckDistance, groundCheck.position.z));
     }
 
-    protected virtual void DestroyMe()
+    public void DestroyMe()
     {
+        rb.velocity = new Vector2(0, 0);
         Destroy(gameObject);
+    }
+
+    public virtual void Damage()
+    {
+        anim.SetTrigger("gotHit");
     }
 
 }

@@ -38,6 +38,13 @@ public class Player : MonoBehaviour
     private bool isWallDetected;
     private bool isWallSliding;
 
+    [Header("Collision Checks - EnemyKill")]
+    [SerializeField] private Transform enemyKillCheck;
+    [SerializeField] private float enemyKillCheckDistance;
+    [SerializeField] private LayerMask whatIsEnemy;
+    private bool isEnemyKilled;
+    
+
 
     void Start()
     {
@@ -65,6 +72,7 @@ public class Player : MonoBehaviour
         }
 
         CollisionChecks();
+        EnemyChecks();
         AnimationController();
         FlipController();
         WallSlideController();
@@ -93,11 +101,23 @@ public class Player : MonoBehaviour
     {
         isGrounded = Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckRadius, whatIsGround);
         isWallDetected = Physics2D.Raycast(wallCheck.position, Vector2.right * facingDirection, wallCheckRadius, whatIsWall);
-
-
-
+       
     }
 
+    private void EnemyChecks()
+    {
+        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(enemyKillCheck.position, enemyKillCheckDistance);
+        foreach (var hitCollider in hitColliders)
+        {
+            if(hitCollider.GetComponent<Enemy>() != null)
+            {
+                
+                Enemy enemy = hitCollider.GetComponent<Enemy>();
+                enemy.Damage();
+                Jump(jumpForce);
+            }
+        }
+    }
 
 
     private void WallSlideController()
@@ -184,5 +204,10 @@ public class Player : MonoBehaviour
     {
         Gizmos.DrawLine(groundCheck.position, new Vector3(groundCheck.position.x, groundCheck.position.y - groundCheckRadius, groundCheck.position.z));
         Gizmos.DrawLine(wallCheck.position, new Vector3(wallCheck.position.x + wallCheckRadius * facingDirection, wallCheck.position.y, wallCheck.position.z));
+        Gizmos.DrawWireSphere(enemyKillCheck.position, enemyKillCheckDistance);
+
     }
+
+
+    
 }
