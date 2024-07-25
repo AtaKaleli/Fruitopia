@@ -42,7 +42,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform enemyKillCheck;
     [SerializeField] private float enemyKillCheckDistance;
     [SerializeField] private LayerMask whatIsEnemy;
-    private bool isEnemyKilled;
+    private bool isEnemyDetected;
     
 
 
@@ -111,12 +111,13 @@ public class Player : MonoBehaviour
         {
             if(hitCollider.GetComponent<Enemy>() != null)
             {
-                
-                Enemy enemy = hitCollider.GetComponent<Enemy>();
+                Enemy enemy = hitCollider.GetComponent<Enemy>();    
                 enemy.Damage();
                 Jump(jumpForce);
             }
         }
+  
+
     }
 
 

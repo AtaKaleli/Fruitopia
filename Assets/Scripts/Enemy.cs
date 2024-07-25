@@ -12,6 +12,8 @@ public class Enemy : Damage
     protected int facingDirection = -1;
     [SerializeField] protected float idleTime;
     protected float idleTimeCounter;
+    protected bool isAggressive;
+    
 
 
     [Header("Collision Checks - Wall")]
@@ -88,7 +90,9 @@ public class Enemy : Damage
 
     public virtual void Damage()
     {
+        
         anim.SetTrigger("gotHit");
+        
     }
 
 }

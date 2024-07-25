@@ -11,7 +11,7 @@ public class Chicken : Enemy
 
     void Update()
     {
-        idleTimeCounter -= Time.deltaTime;
+        
 
         WalkAround();
         CollisionChecks();
