@@ -13,7 +13,7 @@ public class Enemy : Damage
     [SerializeField] protected float idleTime;
     protected float idleTimeCounter;
     protected bool isAggressive;
-    
+    protected bool canMove = true;
 
 
     [Header("Collision Checks - Wall")]
@@ -34,7 +34,10 @@ public class Enemy : Damage
         anim = GetComponent<Animator>();
     }
 
-    
+    protected virtual void AnimationController()
+    {
+        anim.SetFloat("xVelocity", rb.velocity.x);
+    }
 
     protected virtual void WalkAround()
     {
@@ -46,12 +49,10 @@ public class Enemy : Damage
             Flip();
         }
 
-        if (idleTimeCounter < 0)
+        if (idleTimeCounter < 0 && canMove)
             Move(moveSpeed * facingDirection, rb.velocity.y);
         else
             Move(0, 0);
-
-
     }
 
    
@@ -71,9 +72,6 @@ public class Enemy : Damage
     {
         isWallDetected = Physics2D.Raycast(wallCheck.position, Vector2.right * facingDirection, wallCheckDistance, whatIsWall);
         isGrounded = Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, whatIsGround);
-
-
-
     }
 
     protected virtual void OnDrawGizmos()
@@ -90,9 +88,7 @@ public class Enemy : Damage
 
     public virtual void Damage()
     {
-        
-        anim.SetTrigger("gotHit");
-        
+        anim.SetTrigger("gotHit");   
     }
 
 }

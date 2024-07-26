@@ -19,8 +19,5 @@ public class Mushroom : Enemy
         AnimationController();
     }
 
-    private void AnimationController()
-    {
-        anim.SetFloat("xVelocity", rb.velocity.x);
-    }
+    
 }

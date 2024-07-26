@@ -19,8 +19,5 @@ public class Slime : Enemy
 
     }
 
-    private void AnimationController()
-    {
-        anim.SetFloat("xVelocity", rb.velocity.x);
-    }
+    
 }

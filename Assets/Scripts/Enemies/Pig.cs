@@ -38,10 +38,7 @@ public class Pig : Enemy
             Flip();
     }
 
-    private void AnimationController()
-    {
-        anim.SetFloat("xVelocity", rb.velocity.x);
-    }
+   
 
     public override void Damage()
     {
