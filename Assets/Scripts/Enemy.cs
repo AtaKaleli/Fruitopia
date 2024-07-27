@@ -15,6 +15,7 @@ public class Enemy : Damage
     protected bool isAggressive;
     protected bool canMove = true;
 
+    [HideInInspector]public bool isInvincible;
 
     [Header("Collision Checks - Wall")]
     [SerializeField] protected Transform wallCheck;

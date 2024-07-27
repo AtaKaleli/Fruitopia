@@ -111,9 +111,18 @@ public class Player : MonoBehaviour
         {
             if(hitCollider.GetComponent<Enemy>() != null)
             {
-                Enemy enemy = hitCollider.GetComponent<Enemy>();    
-                enemy.Damage();
-                Jump(jumpForce);
+                
+                Enemy enemy = hitCollider.GetComponent<Enemy>();
+               
+                if (enemy.isInvincible)
+                    return;
+                
+                if(rb.velocity.y < 0)
+                {
+                    enemy.Damage();
+                    Jump(jumpForce);
+                }
+                
             }
         }
   
