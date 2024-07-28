@@ -16,12 +16,17 @@ public class FatBird : Enemy
     
     void Update()
     {
-        if(isGrounded)
+        if (isGrounded)
             idleTimeCounter -= Time.deltaTime;
 
 
         CollisionChecks();
         JumpFallController();
+        FatBirdAnimationController();
+    }
+
+    private void FatBirdAnimationController()
+    {
         anim.SetBool("isGrounded", isGrounded);
         anim.SetFloat("yVelocity", rb.velocity.y);
     }
@@ -30,7 +35,7 @@ public class FatBird : Enemy
     {
         if(idleTimeCounter < 0)
         {
-            rb.velocity = new Vector2(0, jumpForce);
+            Move(0, jumpForce);
             idleTimeCounter = idleTime;
         }
     }
