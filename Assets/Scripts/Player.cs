@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
     private bool canMove = true;
     private bool canDoubleJump = true;
     private bool isFacingRight = true;
-    private int facingDirection = 1;
+    [HideInInspector]public int facingDirection = 1;
 
     [Header("Collision Checks - Ground")]
     [SerializeField] private Transform groundCheck;
