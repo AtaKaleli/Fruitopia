@@ -16,6 +16,7 @@ public class Enemy : Damage
     protected bool canMove = true;
 
     [HideInInspector]public bool isInvincible;
+    
 
     [Header("Collision Checks - Wall")]
     [SerializeField] protected Transform wallCheck;
@@ -81,8 +82,8 @@ public class Enemy : Damage
 
     protected virtual void OnDrawGizmos()
     {
-        Gizmos.DrawLine(wallCheck.position, new Vector3(wallCheck.position.x + wallCheckDistance * facingDirection, wallCheck.position.y, wallCheck.position.z));
-        Gizmos.DrawLine(groundCheck.position, new Vector3(groundCheck.position.x, groundCheck.position.y - groundCheckDistance, groundCheck.position.z));
+        Gizmos.DrawLine(wallCheck.position, new Vector2(wallCheck.position.x + wallCheckDistance * facingDirection, wallCheck.position.y));
+        Gizmos.DrawLine(groundCheck.position, new Vector2(groundCheck.position.x, groundCheck.position.y - groundCheckDistance));
     }
 
     public void DestroyMe()
