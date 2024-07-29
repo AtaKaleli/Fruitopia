@@ -57,10 +57,7 @@ public class Enemy : Damage
             Move(0, 0);
     }
 
-    protected virtual void FlyAround()
-    {
-        // to be implemented for flying enemies
-    }
+    
    
 
     protected virtual void Move(float xVelocity, float yVelocity)
