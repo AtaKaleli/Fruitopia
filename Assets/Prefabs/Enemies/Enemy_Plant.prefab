@@ -308,7 +308,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   playerDetectionDistance: 15
-  bulletPref: {fileID: 5920642621996381545, guid: 030ce3bba13fa2348a0db9ff68adaf37, type: 3}
+  bulletPref: {fileID: 4584605220560763122, guid: cf691ecb3f999b143bea4b9ac797d14f, type: 3}
   bulletOrigin: {fileID: 2864908934732358144}
   bulletSpeed: 6
   attackTime: 1
