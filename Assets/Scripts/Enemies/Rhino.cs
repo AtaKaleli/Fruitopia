@@ -2,25 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Chameleon : Enemy
+public class Rhino : Enemy
 {
-
-    [SerializeField] private BoxCollider2D tonqueBC;
-
     [Header("Player Detection")]
     private RaycastHit2D playerDetection;
     [SerializeField] private float playerDetectionDistance;
     [SerializeField] private LayerMask whatIsPlayer;
-    
 
-    [Header("AggressiveMode Timers")]
+    [Header("Aggressive Mode")]
     [SerializeField] private float aggressiveTime;
     private float aggressiveTimeCounter;
-    
+
+    [SerializeField] private float aggressiveMoveSpeed;
+    [SerializeField] private float normalMoveSpeed;
+
+    private bool isShocked;
 
     protected override void Start()
     {
         base.Start();
+        isInvincible = true;
+        
     }
 
     void Update()
@@ -28,32 +30,12 @@ public class Chameleon : Enemy
         aggressiveTimeCounter -= Time.deltaTime;
 
 
-
-        EnemyStateController();
+        PhaseController();
+        WalkAround();
         CollisionChecks();
         AnimationController();
-
-        anim.SetBool("isAggressive", isAggressive);
-    }
-    private void EnemyStateController()
-    {
-        if (!playerDetection && aggressiveTimeCounter < 0)
-        {
-            isAggressive = false;
-            canMove = true;
-            WalkAround();
-        }
-        
     }
 
-    public void MakeTonqueEnable()
-    {
-        tonqueBC.enabled = true;
-    }
-    public void MakeTonqueDisable()
-    {
-        tonqueBC.enabled = false;
-    }
 
     protected override void CollisionChecks()
     {
@@ -63,10 +45,8 @@ public class Chameleon : Enemy
         if (playerDetection)
         {
             aggressiveTimeCounter = aggressiveTime;
-            isAggressive = true;
+            moveSpeed = aggressiveMoveSpeed;
         }
-        
-
     }
 
 
@@ -74,5 +54,33 @@ public class Chameleon : Enemy
     {
         base.OnDrawGizmos();
         Gizmos.DrawLine(transform.position, new Vector2(transform.position.x + playerDetection.distance * facingDirection, transform.position.y));
+    }
+
+    private void PhaseController()
+    {
+        if(!playerDetection && aggressiveTimeCounter < 0)
+        { 
+            moveSpeed = normalMoveSpeed;
+        }
+
+        else if(!playerDetection && aggressiveTimeCounter > 0 && isWallDetected)
+        {
+            isShocked = true;
+            isInvincible = false;
+        }
+
+    }
+
+    public void BackToNormal()
+    {
+        
+        isShocked = false;
+        isInvincible = true;
+    }
+
+    protected override void AnimationController()
+    {
+        base.AnimationController();
+        anim.SetBool("isShocked", isShocked);
     }
 }
