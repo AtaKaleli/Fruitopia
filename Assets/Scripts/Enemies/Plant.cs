@@ -4,17 +4,17 @@ public class Plant : Enemy
 {
 
     [Header("Player Detection")]
-    [SerializeField] private LayerMask whatIsPlayer;
-    [SerializeField] private float playerDetectionDistance;
-    private RaycastHit2D playerDetection;
+    [SerializeField] protected LayerMask whatIsPlayer;
+    [SerializeField] protected float playerDetectionDistance;
+    protected RaycastHit2D playerDetection;
 
     [Header("Attack Information")]
-    [SerializeField] private GameObject bulletPref;
-    [SerializeField] private Transform bulletOrigin;
-    [SerializeField] private float bulletSpeed;
-    [SerializeField] private float attackTime;
+    [SerializeField] protected GameObject bulletPref;
+    [SerializeField] protected Transform bulletOrigin;
+    [SerializeField] protected float bulletSpeed;
+    [SerializeField] protected float attackTime;
     [SerializeField] private bool isFacingRight;
-    private float attackTimeCounter;
+    protected float attackTimeCounter;
 
 
 
@@ -59,7 +59,7 @@ public class Plant : Enemy
 
     }
 
-    private void SetAttackTimer()
+    protected void SetAttackTimer()
     {
         attackTimeCounter = attackTime;
         isAggressive = false;
@@ -72,7 +72,7 @@ public class Plant : Enemy
     }
 
 
-    private void Attack()
+    protected void Attack()
     {
 
         GameObject newBullet = Instantiate(bulletPref, bulletOrigin.position, Quaternion.identity);

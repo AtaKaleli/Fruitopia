@@ -1,19 +1,9 @@
 using UnityEngine;
 
-public class Trunk : Enemy
+public class Trunk : Plant
 {
 
-    [Header("Player Detection")]
-    [SerializeField] private LayerMask whatIsPlayer;
-    [SerializeField] private float playerDetectionDistance;
-    private RaycastHit2D playerDetection;
-
-    [Header("Attack Information")]
-    [SerializeField] private GameObject bulletPref;
-    [SerializeField] private Transform bulletOrigin;
-    [SerializeField] private float bulletSpeed;
-    [SerializeField] private float attackTime;
-    private float attackTimeCounter;
+    
 
 
     protected override void Start()
@@ -63,11 +53,7 @@ public class Trunk : Enemy
         }
     }
 
-    private void SetAttackTimer()
-    {
-        attackTimeCounter = attackTime;
-        isAggressive = false;
-    }
+    
 
     protected override void OnDrawGizmos()
     {
@@ -75,9 +61,5 @@ public class Trunk : Enemy
         Gizmos.DrawLine(transform.position, new Vector2(transform.position.x + playerDetection.distance * facingDirection, transform.position.y));
     }
 
-    private void Attack()
-    {
-        GameObject newBullet = Instantiate(bulletPref, bulletOrigin.position, Quaternion.identity);
-        newBullet.GetComponent<Bullet>().SetVelocity(bulletSpeed * facingDirection);
-    }
+    
 }
