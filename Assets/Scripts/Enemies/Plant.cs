@@ -11,7 +11,8 @@ public class Plant : Enemy
     [Header("Attack Information")]
     [SerializeField] protected GameObject bulletPref;
     [SerializeField] protected Transform bulletOrigin;
-    [SerializeField] protected float bulletSpeed;
+    [SerializeField] protected float bulletSpeedX;
+    [SerializeField] protected float bulletSpeedY;
     [SerializeField] protected float attackTime;
     [SerializeField] private bool isFacingRight;
     protected float attackTimeCounter;
@@ -72,11 +73,11 @@ public class Plant : Enemy
     }
 
 
-    protected void Attack()
+    protected virtual void Attack()
     {
 
         GameObject newBullet = Instantiate(bulletPref, bulletOrigin.position, Quaternion.identity);
-        newBullet.GetComponent<Bullet>().SetVelocity(bulletSpeed * facingDirection);
+        newBullet.GetComponent<Bullet>().SetVelocity(bulletSpeedX * facingDirection,bulletSpeedY);
 
     }
 

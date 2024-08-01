@@ -5,7 +5,8 @@ using UnityEngine;
 public class Bullet : Damage
 {
     private Rigidbody2D rb;
-    private float moveSpeed;
+    private float moveSpeedX;
+    private float moveSpeedY;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -16,17 +17,19 @@ public class Bullet : Damage
     // Update is called once per frame
     void Update()
     {
-        rb.velocity = new Vector2(moveSpeed, 0);
+        rb.velocity = new Vector2(moveSpeedX, moveSpeedY);
     }
     
-    public void SetVelocity(float xVelocity)
+    public void SetVelocity(float xVelocity, float yVelocity)
     {
-        moveSpeed = xVelocity; 
+        moveSpeedX = xVelocity; 
+        moveSpeedY = yVelocity; 
     }
 
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
         base.OnTriggerEnter2D(collision);
-        Destroy(gameObject);
+        if(collision.GetComponent<Bullet>() == null)
+            Destroy(gameObject);
     }
 }
