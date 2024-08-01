@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Bee : Plant
 {
+    [Header("Player Checks")]
     [SerializeField] private Transform playerCheck;
     private bool isPlayerDetected;
     [SerializeField] private Transform[] movePoints;
