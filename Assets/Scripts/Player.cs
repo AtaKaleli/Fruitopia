@@ -261,6 +261,7 @@ public class Player : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
+        print("asd");
         if (collision.GetComponent<Ground_Ice>() != null)
         {
             walkingSpecialGround = true;
@@ -274,11 +275,19 @@ public class Player : MonoBehaviour
             Move(0f);
             jumpForce = 10f;
         }
+        else if (collision.GetComponent<Ground_Sand>() != null)
+        {
+            
+            walkingSpecialGround = true;
+            canMove = false;
+            jumpForce = 0f;
+            Move(0.5f);
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.GetComponent<Ground_Ice>() != null || collision.GetComponent<Ground_Mud>() != null)
+        if (collision.GetComponent<Ground_Ice>() != null || collision.GetComponent<Ground_Mud>() != null || collision.GetComponent<Ground_Sand>() != null)
         {
             walkingSpecialGround = false;
             canMove = true;
