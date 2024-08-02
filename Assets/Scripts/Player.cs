@@ -41,9 +41,14 @@ public class Player : MonoBehaviour
     [Header("Collision Checks - EnemyKill")]
     [SerializeField] private Transform enemyKillCheck;
     [SerializeField] private float enemyKillCheckDistance;
-    [SerializeField] private LayerMask whatIsEnemy;
-    private bool isEnemyDetected;
     
+
+    [Header("Collision Checks - Box")]
+    [SerializeField] private Transform boxHitCheck;
+    [SerializeField] private float boxHitCheckDistance;
+    
+   
+
 
 
     void Start()
@@ -107,6 +112,8 @@ public class Player : MonoBehaviour
     private void EnemyChecks()
     {
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(enemyKillCheck.position, enemyKillCheckDistance);
+        Collider2D[] boxColliders = Physics2D.OverlapCircleAll(boxHitCheck.position, boxHitCheckDistance);
+
         foreach (var hitCollider in hitColliders)
         {
             if(hitCollider.GetComponent<Enemy>() != null)
@@ -124,9 +131,34 @@ public class Player : MonoBehaviour
                 }
                 
             }
-        }
-  
+            else if(hitCollider.GetComponent<Box>() != null)
+            {
+                Box box = hitCollider.GetComponent<Box>();
 
+                if (rb.velocity.y < 0)
+                {
+                    
+                    box.Damage();
+                    Jump(jumpForce * 0.8f);
+                }
+            }
+            
+        }
+
+        foreach (var hitCollider in boxColliders)
+        {
+            if (hitCollider.GetComponent<Box>() != null)
+            {
+                Box box = hitCollider.GetComponent<Box>();
+
+                if (rb.velocity.y >= 0)
+                {
+                    
+                    box.Damage();
+                    Jump(-jumpForce * 0.8f);
+                }
+            }
+        }
     }
 
 
@@ -215,6 +247,7 @@ public class Player : MonoBehaviour
         Gizmos.DrawLine(groundCheck.position, new Vector3(groundCheck.position.x, groundCheck.position.y - groundCheckRadius, groundCheck.position.z));
         Gizmos.DrawLine(wallCheck.position, new Vector3(wallCheck.position.x + wallCheckRadius * facingDirection, wallCheck.position.y, wallCheck.position.z));
         Gizmos.DrawWireSphere(enemyKillCheck.position, enemyKillCheckDistance);
+        Gizmos.DrawWireSphere(boxHitCheck.position, boxHitCheckDistance);
 
     }
 

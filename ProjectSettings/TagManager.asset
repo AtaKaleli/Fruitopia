@@ -51,6 +51,9 @@ TagManager:
   - name: Ground
     uniqueID: 208993625
     locked: 0
+  - name: Box-Fruit
+    uniqueID: 1400043373
+    locked: 0
   - name: Enemy
     uniqueID: 2819780905
     locked: 0
