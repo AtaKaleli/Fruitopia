@@ -9,8 +9,9 @@ public class Player : MonoBehaviour
 
 
     [Header("Player Forces")]
-    [SerializeField] private float speed;
+    [SerializeField] private float moveSpeed;
     [SerializeField] private float jumpForce;
+    private bool walkingSpecialGround;
 
     [Header("Knockback Information")]
     [SerializeField] private float knockBackTime;
@@ -64,7 +65,7 @@ public class Player : MonoBehaviour
         if (isKnocked)
             return;
 
-        if (isGrounded || isWallSliding)
+        if ((isGrounded || isWallSliding) && !walkingSpecialGround)
         {
             canDoubleJump = true;
             canMove = true;
@@ -73,7 +74,7 @@ public class Player : MonoBehaviour
 
         if (canMove)
         {
-            Move();
+            Move(1.0f);
         }
 
         CollisionChecks();
@@ -197,10 +198,10 @@ public class Player : MonoBehaviour
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
     }
 
-    private void Move()
+    private void Move(float speedMultiplier)
     {
         float horizontalInput = Input.GetAxisRaw("Horizontal");
-        rb.velocity = new Vector2(horizontalInput * speed, rb.velocity.y);
+        rb.velocity = new Vector2(horizontalInput * moveSpeed * speedMultiplier, rb.velocity.y);
     }
 
     void FlipController()
@@ -220,6 +221,11 @@ public class Player : MonoBehaviour
     public void SetCanMove(bool status)
     {
         canMove = status;
+    }
+
+    public float GetMoveSpeed()
+    {
+        return moveSpeed;
     }
 
     public void KnockBack()
@@ -251,6 +257,23 @@ public class Player : MonoBehaviour
 
     }
 
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.GetComponent<Ground_Ice>() != null)
+        {
+            walkingSpecialGround = true;
+            canMove = false;
+            Move(3f);
+        }
+    }
 
-    
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.GetComponent<Ground_Ice>() != null)
+        {
+            walkingSpecialGround = false;
+            canMove = true;
+        }
+    }
+
 }
