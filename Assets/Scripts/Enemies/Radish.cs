@@ -4,16 +4,16 @@ public class Radish : Enemy
 {
 
     [Header("Collision Checks - UpperGround")]
-    [SerializeField] private float upperGroundCheckDistance;
-    [SerializeField] private Transform upperGroundCheck;
-    private bool isUpperGrounded;
+    [SerializeField] protected float upperGroundCheckDistance;
+    [SerializeField] protected Transform upperGroundCheck;
+    protected bool isUpperGrounded;
 
     [Header("Fly Time")]
-    [SerializeField] private float groundTime;
-    private float groundTimeCounter;
+    [SerializeField] protected float groundTime;
+    protected float groundTimeCounter;
 
-    [SerializeField] private float flyForce;
-    private bool isFlying = true;
+    [SerializeField] protected float flyForce;
+    protected bool isFlying = true;
 
 
     protected override void Start()
@@ -54,7 +54,7 @@ public class Radish : Enemy
 
     }
 
-    private void Fly()
+    protected void Fly()
     {
         if (!isUpperGrounded)
             Move(0, flyForce);
