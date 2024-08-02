@@ -89,6 +89,7 @@ public class Player : MonoBehaviour
 
         }
 
+        
 
 
 
@@ -180,6 +181,7 @@ public class Player : MonoBehaviour
     {
         if (isWallSliding || isGrounded)
         {
+            
             Jump(jumpForce);
 
         }
@@ -265,15 +267,24 @@ public class Player : MonoBehaviour
             canMove = false;
             Move(3f);
         }
+        else if(collision.GetComponent<Ground_Mud>() != null)
+        {
+            walkingSpecialGround = true;
+            canMove = false;
+            Move(0f);
+            jumpForce = 10f;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.GetComponent<Ground_Ice>() != null)
+        if (collision.GetComponent<Ground_Ice>() != null || collision.GetComponent<Ground_Mud>() != null)
         {
             walkingSpecialGround = false;
             canMove = true;
+            jumpForce = 15f;
         }
+       
     }
 
 }
