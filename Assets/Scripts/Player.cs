@@ -3,15 +3,21 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+
+
+
     private Rigidbody2D rb;
     private Animator anim;
 
-
-
-    [Header("Player Forces")]
+    [Header("Player Movement")]
     [SerializeField] private float moveSpeed;
     [SerializeField] private float jumpForce;
-    private bool walkingSpecialGround;
+    private bool walkingSandMudIce;
+    private bool canMove = true;
+    private bool canDoubleJump = true;
+    private bool isFacingRight = true;
+    [HideInInspector] public int facingDirection = 1;
+
 
     [Header("Knockback Information")]
     [SerializeField] private float knockBackTime;
@@ -21,16 +27,12 @@ public class Player : MonoBehaviour
     private bool canBeKnockable = true;
 
 
-    private bool canMove = true;
-    private bool canDoubleJump = true;
-    private bool isFacingRight = true;
-    [HideInInspector]public int facingDirection = 1;
-
     [Header("Collision Checks - Ground")]
     [SerializeField] private Transform groundCheck;
     [SerializeField] private float groundCheckRadius;
     [SerializeField] private LayerMask whatIsGround;
     private bool isGrounded;
+
 
     [Header("Collision Checks - Wall")]
     [SerializeField] private Transform wallCheck;
@@ -42,13 +44,10 @@ public class Player : MonoBehaviour
     [Header("Collision Checks - EnemyKill")]
     [SerializeField] private Transform enemyKillCheck;
     [SerializeField] private float enemyKillCheckDistance;
-    
 
     [Header("Collision Checks - Box")]
     [SerializeField] private Transform boxHitCheck;
     [SerializeField] private float boxHitCheckDistance;
-    
-   
 
 
 
@@ -56,20 +55,20 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-
     }
 
 
     void Update()
     {
         if (isKnocked)
+        {
             return;
+        }
 
-        if ((isGrounded || isWallSliding) && !walkingSpecialGround)
+        if ((isGrounded || isWallSliding) && !walkingSandMudIce)
         {
             canDoubleJump = true;
             canMove = true;
-
         }
 
         if (canMove)
@@ -86,13 +85,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             JumpController();
-
         }
-
-        
-
-
-
     }
 
     private void AnimationController()
@@ -101,14 +94,12 @@ public class Player : MonoBehaviour
         anim.SetFloat("yVelocity", rb.velocity.y);
         anim.SetBool("isGrounded", isGrounded);
         anim.SetBool("isWallSliding", isWallSliding);
-         
     }
 
     private void CollisionChecks()
     {
         isGrounded = Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckRadius, whatIsGround);
         isWallDetected = Physics2D.Raycast(wallCheck.position, Vector2.right * facingDirection, wallCheckRadius, whatIsWall);
-       
     }
 
     private void EnemyChecks()
@@ -118,33 +109,32 @@ public class Player : MonoBehaviour
 
         foreach (var hitCollider in hitColliders)
         {
-            if(hitCollider.GetComponent<Enemy>() != null)
+            if (hitCollider.GetComponent<Enemy>() != null)
             {
-                
+
                 Enemy enemy = hitCollider.GetComponent<Enemy>();
-               
+
                 if (enemy.isInvincible)
+                {
                     return;
-                
-                if(rb.velocity.y < 0)
+                }
+
+                if (rb.velocity.y < 0)
                 {
                     enemy.Damage();
                     Jump(jumpForce);
                 }
-                
             }
-            else if(hitCollider.GetComponent<Box>() != null)
+            else if (hitCollider.GetComponent<Box>() != null)
             {
                 Box box = hitCollider.GetComponent<Box>();
 
                 if (rb.velocity.y < 0)
                 {
-                    
                     box.Damage();
                     Jump(jumpForce * 0.8f);
                 }
             }
-            
         }
 
         foreach (var hitCollider in boxColliders)
@@ -155,14 +145,12 @@ public class Player : MonoBehaviour
 
                 if (rb.velocity.y >= 0)
                 {
-                    
                     box.Damage();
                     Jump(-jumpForce * 0.8f);
                 }
             }
         }
     }
-
 
     private void WallSlideController()
     {
@@ -172,26 +160,21 @@ public class Player : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.1f);
         }
         else
+        {
             isWallSliding = false;
+        }
     }
-
-
 
     private void JumpController()
     {
         if (isWallSliding || isGrounded)
         {
-            
             Jump(jumpForce);
-
         }
-        else
+        else if (canDoubleJump)
         {
-            if (canDoubleJump)
-            {
-                Jump(jumpForce * 0.75f);
-                canDoubleJump = false;
-            }
+            Jump(jumpForce * 0.75f);
+            canDoubleJump = false;
         }
     }
 
@@ -209,10 +192,15 @@ public class Player : MonoBehaviour
     void FlipController()
     {
         if (isFacingRight && rb.velocity.x < 0)
+        {
             Flip();
+        }
         else if (!isFacingRight && rb.velocity.x > 0)
+        {
             Flip();
+        }
     }
+
     void Flip()
     {
         transform.Rotate(new Vector3(0, 180, 0));
@@ -225,15 +213,12 @@ public class Player : MonoBehaviour
         canMove = status;
     }
 
-    public float GetMoveSpeed()
-    {
-        return moveSpeed;
-    }
-
     public void KnockBack()
     {
-        if(canBeKnockable)
+        if (canBeKnockable)
+        {
             StartCoroutine(KnockbackController());
+        }
     }
 
     IEnumerator KnockbackController()
@@ -241,14 +226,14 @@ public class Player : MonoBehaviour
         isKnocked = true;
         canBeKnockable = false;
         anim.SetTrigger("isKnocked");
-        rb.velocity = new Vector2(knockBackDirection.x * -facingDirection , knockBackDirection.y);
+        rb.velocity = new Vector2(knockBackDirection.x * -facingDirection, knockBackDirection.y);
         yield return new WaitForSeconds(knockBackTime);
         isKnocked = false;
         canBeKnockable = true;
     }
 
-    
-   
+
+
 
     private void OnDrawGizmos()
     {
@@ -256,44 +241,42 @@ public class Player : MonoBehaviour
         Gizmos.DrawLine(wallCheck.position, new Vector3(wallCheck.position.x + wallCheckRadius * facingDirection, wallCheck.position.y, wallCheck.position.z));
         Gizmos.DrawWireSphere(enemyKillCheck.position, enemyKillCheckDistance);
         Gizmos.DrawWireSphere(boxHitCheck.position, boxHitCheckDistance);
-
     }
+
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        print("asd");
-        if (collision.GetComponent<Ground_Ice>() != null)
+        if (collision.CompareTag("Ground_Ice"))
         {
-            walkingSpecialGround = true;
-            canMove = false;
-            Move(3f);
+            SandMudIceController(true, false, 3f, 15f);
         }
-        else if(collision.GetComponent<Ground_Mud>() != null)
+        else if (collision.CompareTag("Ground_Mud"))
         {
-            walkingSpecialGround = true;
-            canMove = false;
-            Move(0f);
-            jumpForce = 10f;
+            SandMudIceController(true, false, 0f, 10f);
         }
-        else if (collision.GetComponent<Ground_Sand>() != null)
+        else if (collision.CompareTag("Ground_Sand"))
         {
-            
-            walkingSpecialGround = true;
-            canMove = false;
-            jumpForce = 0f;
-            Move(0.5f);
+            SandMudIceController(true, false, 0.5f, 0f);
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.GetComponent<Ground_Ice>() != null || collision.GetComponent<Ground_Mud>() != null || collision.GetComponent<Ground_Sand>() != null)
+        if (collision.tag == "Ground_Ice" || collision.tag == "Ground_Mud" || collision.tag == "Ground_Sand")
         {
-            walkingSpecialGround = false;
-            canMove = true;
-            jumpForce = 15f;
+            SandMudIceController(false, true, 1f, 15f);
         }
-       
     }
+
+    private void SandMudIceController(bool walkingStatus, bool canMoveStatus, float newMoveSpeed, float newJumpForce)
+    {
+        walkingSandMudIce = walkingStatus;
+        canMove = canMoveStatus;
+        jumpForce = newJumpForce;
+        Move(newMoveSpeed);
+    }
+
+
+
 
 }

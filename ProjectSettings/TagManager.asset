@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Ground
   - Ground_Sand
+  - Ground_Ice
+  - Ground_Mud
   layers:
   - Default
   - TransparentFX
