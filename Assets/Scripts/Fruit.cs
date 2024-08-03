@@ -5,6 +5,7 @@ using UnityEngine;
 public class Fruit : MonoBehaviour
 {
     private Animator anim;
+    [SerializeField] private GameObject collectedVFXPref;
 
 
     void Start()
@@ -19,6 +20,8 @@ public class Fruit : MonoBehaviour
         {
             GameManager.instance.AddFruit();
             Destroy(gameObject);
+
+            GameObject newCollectedVFX = Instantiate(collectedVFXPref, transform.position, Quaternion.identity);
         }
     }
 
