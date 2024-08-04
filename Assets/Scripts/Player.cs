@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
     private bool isKnocked;
     [SerializeField] private float untouchableTime;
     private bool canBeKnockable = true;
+    [SerializeField] private GameObject disappearVFXPref;
 
 
     [Header("Collision Checks - Ground")]
@@ -211,6 +212,13 @@ public class Player : MonoBehaviour
     public void SetCanMove(bool status)
     {
         canMove = status;
+    }
+
+    public void Die()
+    {
+        Destroy(gameObject);
+
+        GameObject newDisappearVFX = Instantiate(disappearVFXPref, transform.position, Quaternion.identity);
     }
 
     public void KnockBack()

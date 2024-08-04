@@ -21,6 +21,7 @@ public class Fruit : MonoBehaviour
             GameManager.instance.AddFruit();
             Destroy(gameObject);
 
+            //add visual effect after destroying the fruit
             GameObject newCollectedVFX = Instantiate(collectedVFXPref, transform.position, Quaternion.identity);
         }
     }
