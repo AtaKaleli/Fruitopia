@@ -145,3 +145,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce6639b8af6001240a1e03d36ecdae9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fruitPref: {fileID: 8921091224077850124, guid: 33ab414ae0a4c6042a3088925ce65549, type: 3}
+  pushForce: 6

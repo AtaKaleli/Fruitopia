@@ -5,13 +5,23 @@ using UnityEngine;
 public class Fruit : MonoBehaviour
 {
     private Animator anim;
+    private Rigidbody2D rb;
+
     [SerializeField] private GameObject collectedVFXPref;
+    [SerializeField] private bool hasNoGravity;
 
 
     void Start()
     {
         anim = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
+
         SetRandomLook();
+
+        if (hasNoGravity) // if fruit has no gravity, this means it is not instantiated in the box.
+        {
+            rb.gravityScale = 0;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

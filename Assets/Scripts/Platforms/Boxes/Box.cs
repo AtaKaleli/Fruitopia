@@ -13,16 +13,11 @@ public class Box : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
-    
-    void Update()
-    {
-        
-    }
-
-    public void Damage()
+    public virtual void Damage()
     {
         hitPoint--;
         anim.SetTrigger("gotHit");
+
         if (hitPoint == 0)
         {
             DestroyMe();
