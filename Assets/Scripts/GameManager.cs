@@ -35,6 +35,11 @@ public class GameManager : MonoBehaviour
         fruitsCollected++;
     }
 
+    public void UpdateRespawnPoint(Transform updatedRespawnPoint)
+    {
+        respawnPoint = updatedRespawnPoint;
+    }
+
     public void RespawnPlayer(float respawnWaitTime)
     {
         StartCoroutine(WaitForRespawn(respawnWaitTime));
