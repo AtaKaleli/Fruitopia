@@ -5,11 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class UI_MainMenu : MonoBehaviour
 {
-    [SerializeField] private string sceneName;
+    
 
 
     public void NewGame()
     {
-        SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene("SampleScene");
+    }
+
+    public void LoadTheCreditsScene()
+    {
+        SceneManager.LoadScene("Credits");
     }
 }

@@ -55,8 +55,8 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void LoadTheEndScene()
+    public void LoadTheCreditsScene()
     {
-        SceneManager.LoadScene("TheEnd");
+        SceneManager.LoadScene("Credits");
     }
 }

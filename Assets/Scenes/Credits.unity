@@ -232,14 +232,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.08074047, g: 0.12717353, b: 0.26415092, a: 0.5529412}
+  m_Color: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: -502091025, guid: 6021876561cd1f74cbfd1290154a050f, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -540,7 +540,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -318.36133, y: 0, z: -254.68933, w: 0}
+  m_margin: {x: -318.36133, y: 102.59827, z: -254.68933, w: -134.6604}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -680,7 +680,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: THE END
+  m_text: CREDITS
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fb5ec88b8a1d10d4dbccf206f61101a3, type: 2}
   m_sharedMaterial: {fileID: -1899432855270864566, guid: fb5ec88b8a1d10d4dbccf206f61101a3, type: 2}
@@ -743,7 +743,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -318.3612, y: 0, z: -235.58777, w: 0}
+  m_margin: {x: -318.3612, y: -230.84619, z: -235.58777, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -878,7 +878,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -318.36133, y: 0, z: -254.68933, w: 0}
+  m_margin: {x: -318.36133, y: -102.41077, z: -254.68933, w: -28.447388}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1083,7 +1083,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -318.36133, y: 0, z: -254.68933, w: 0}
+  m_margin: {x: -318.36133, y: 0, z: -254.68933, w: -98.2608}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1155,7 +1155,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Created by Ata Kaleli
+  m_text: Created by Ata Kaleli using Unity Game Engine, Version 2021.3.17f
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fb5ec88b8a1d10d4dbccf206f61101a3, type: 2}
   m_sharedMaterial: {fileID: -1899432855270864566, guid: fb5ec88b8a1d10d4dbccf206f61101a3, type: 2}
@@ -1218,7 +1218,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -318.36133, y: 0, z: -254.68933, w: 0}
+  m_margin: {x: -318.36133, y: -17.068481, z: -254.68933, w: -102.41089}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1271,7 +1271,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: -107}
+  m_AnchoredPosition: {x: 0, y: -210}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1949520139
@@ -1500,8 +1500,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectT: {fileID: 1949520137}
-  speed: 200
-  offScreenposition: 2150
+  speed: 100
+  offScreenposition: 2300
 --- !u!1 &2101104256
 GameObject:
   m_ObjectHideFlags: 0
