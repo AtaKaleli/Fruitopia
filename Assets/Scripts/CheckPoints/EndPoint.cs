@@ -16,7 +16,8 @@ public class EndPoint : MonoBehaviour
         if(collision.GetComponent<Player>() != null)
         {
             anim.SetTrigger("reached");
-            GameManager.instance.LoadTheCreditsScene();
+
+            GameManager.instance.SwitchToLevelEnd();
         }
     }
 

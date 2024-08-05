@@ -5,16 +5,37 @@ using UnityEngine.SceneManagement;
 
 public class UI_MainMenu : MonoBehaviour
 {
-    
+    private UI_FadeEffect fadeEffect;
 
-
-    public void NewGame()
+    private void Awake()
     {
-        SceneManager.LoadScene("SampleScene");
+        fadeEffect = GetComponentInChildren<UI_FadeEffect>();
     }
 
-    public void LoadTheCreditsScene()
+    private void Start()
+    {
+        fadeEffect.ScreenFade(0, 1.5f);
+    }
+
+
+    public void SwitchToNewLevel()
+    {
+        fadeEffect.ScreenFade(1, 1.5f, LoadTheLevelScene);
+    }
+
+    private void LoadTheLevelScene()
+    {
+        SceneManager.LoadScene("Level1");
+    }
+
+    public void SwitchToCredits()
+    {
+        fadeEffect.ScreenFade(1, 1.5f, LoadTheCreditsScene);
+    }
+
+    private void LoadTheCreditsScene()
     {
         SceneManager.LoadScene("Credits");
     }
+
 }

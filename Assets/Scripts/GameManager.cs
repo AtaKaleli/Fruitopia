@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
 
     public static GameManager instance;
 
+    
+
     [Header("Player")]
     public Player player;
     [SerializeField] private GameObject playerPref;
@@ -29,6 +31,7 @@ public class GameManager : MonoBehaviour
         }
 
         RespawnPlayer(0f); // respawn the player at the beginning of the level
+        UI_Ingame.instance.fadeEffect.ScreenFade(0, 1f);
     }
 
     public void AddFruit()
@@ -54,9 +57,17 @@ public class GameManager : MonoBehaviour
         player.SetCanMove(false);
     }
 
+    public void SwitchToLevelEnd()
+    {
+        UI_Ingame.instance.fadeEffect.ScreenFade(1, 1.5f, LevelFinished);
+    }
 
-    public void LoadTheCreditsScene()
+    private void LevelFinished()
     {
         SceneManager.LoadScene("Credits");
     }
+
+    
+
+    
 }
