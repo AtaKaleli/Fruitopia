@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class UI_MainMenu : MonoBehaviour
 {
     private UI_FadeEffect fadeEffect;
+    [SerializeField] private GameObject[] UI_Elements;
 
     private void Awake()
     {
@@ -38,4 +39,13 @@ public class UI_MainMenu : MonoBehaviour
         SceneManager.LoadScene("Credits");
     }
 
+    public void SwicthToUI(GameObject UI_Element)
+    {
+        foreach (GameObject ui in UI_Elements)
+        {
+            ui.SetActive(false);
+        }
+        UI_Element.SetActive(true);
+    }
+    
 }
