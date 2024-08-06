@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
     private bool isKnocked;
     [SerializeField] private float untouchableTime;
     private bool canBeKnockable = true;
-    [SerializeField] private GameObject disappearVFXPref;
+    
 
 
     [Header("Collision Checks - Ground")]
@@ -53,11 +53,19 @@ public class Player : MonoBehaviour
     [SerializeField] private float boxHitCheckDistance;
 
 
+    [Header("Player Visuals")]
+    [SerializeField] private GameObject disappearVFXPref;
+    [SerializeField] private int skinID;
+    //we used animatorOverrideController for skin selection.It allows to override different animations of player
+    [SerializeField] private AnimatorOverrideController[] animators; 
+
+
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        UpdateSkin();
     }
 
 
@@ -91,6 +99,17 @@ public class Player : MonoBehaviour
         AnimationController();
 
         
+    }
+
+    public void UpdateSkin()
+    {
+
+        SkinManager skinManager = SkinManager.instance;
+
+        if (skinManager == null)
+            return;
+
+        anim.runtimeAnimatorController = animators[skinManager.chosenSkinId]; // this allows us to select the desired animations for player
     }
 
     private void Move(float speedMultiplier)
