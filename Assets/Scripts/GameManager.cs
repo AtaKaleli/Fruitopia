@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 
     public static GameManager instance;
 
+    [SerializeField] private int currentLevelIndex;
     
 
     [Header("Player")]
@@ -34,6 +35,11 @@ public class GameManager : MonoBehaviour
         UI_Ingame.instance.fadeEffect.ScreenFade(0, 1f);
     }
 
+    private void Start()
+    {
+        currentLevelIndex = SceneManager.GetActiveScene().buildIndex;
+    }
+
     public void AddFruit()
     {
         fruitsCollected++;
@@ -57,14 +63,27 @@ public class GameManager : MonoBehaviour
         player.SetCanMove(false);
     }
 
-    public void SwitchToLevelEnd()
+    public void LevelFinished()
     {
-        UI_Ingame.instance.fadeEffect.ScreenFade(1, 1.5f, LevelFinished);
+        int lastIndex = SceneManager.sceneCountInBuildSettings - 2;
+        bool isGameOver = currentLevelIndex == lastIndex;
+
+        if(isGameOver)
+            UI_Ingame.instance.fadeEffect.ScreenFade(1, 1.5f, LoadTheEndScene);
+        else
+            UI_Ingame.instance.fadeEffect.ScreenFade(1, 1.5f, LoadNextLevel);
+
     }
 
-    private void LevelFinished()
+    private void LoadTheEndScene()
     {
         SceneManager.LoadScene("Credits");
+    }
+
+    private void LoadNextLevel()
+    {
+        int nextLevelIndex = currentLevelIndex + 1;
+        SceneManager.LoadScene("Level_" + nextLevelIndex);
     }
 
     

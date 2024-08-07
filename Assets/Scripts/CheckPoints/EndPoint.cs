@@ -17,7 +17,7 @@ public class EndPoint : MonoBehaviour
         {
             anim.SetTrigger("reached");
 
-            GameManager.instance.SwitchToLevelEnd();
+            GameManager.instance.LevelFinished();
         }
     }
 
