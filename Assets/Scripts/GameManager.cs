@@ -8,7 +8,9 @@ public class GameManager : MonoBehaviour
 
     public static GameManager instance;
 
-    [SerializeField] private int currentLevelIndex;
+    private int currentLevelIndex;
+    private int nextLevelIndex;
+    public int lastContinueLevelIndex;
     
 
     [Header("Player")]
@@ -37,7 +39,10 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        
         currentLevelIndex = SceneManager.GetActiveScene().buildIndex;
+        nextLevelIndex = currentLevelIndex + 1;
+        lastContinueLevelIndex = currentLevelIndex; // this is the index of the last level that player played
     }
 
     public void AddFruit()
@@ -63,17 +68,7 @@ public class GameManager : MonoBehaviour
         player.SetCanMove(false);
     }
 
-    public void LevelFinished()
-    {
-        int lastIndex = SceneManager.sceneCountInBuildSettings - 2;
-        bool isGameOver = currentLevelIndex == lastIndex;
-
-        if(isGameOver)
-            UI_Ingame.instance.fadeEffect.ScreenFade(1, 1.5f, LoadTheEndScene);
-        else
-            UI_Ingame.instance.fadeEffect.ScreenFade(1, 1.5f, LoadNextLevel);
-
-    }
+  
 
     private void LoadTheEndScene()
     {
@@ -82,11 +77,22 @@ public class GameManager : MonoBehaviour
 
     private void LoadNextLevel()
     {
-        int nextLevelIndex = currentLevelIndex + 1;
         SceneManager.LoadScene("Level_" + nextLevelIndex);
     }
 
-    
+    public void LoadNextScene()
+    {
+        int lastIndex = SceneManager.sceneCountInBuildSettings - 2;
+        bool isGameOver = currentLevelIndex == lastIndex;
+
+        if (isGameOver)
+            UI_Ingame.instance.fadeEffect.ScreenFade(1, 1.5f, LoadTheEndScene);
+        else
+        {
+            PlayerPrefs.SetInt("Level" + nextLevelIndex + "Unlocked", 1); // If the game is not end, this means we unlocked the next level
+            UI_Ingame.instance.fadeEffect.ScreenFade(1, 1.5f, LoadNextLevel);
+        }
+    }
 
     
 }

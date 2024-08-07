@@ -7,10 +7,11 @@ public class UI_MainMenu : MonoBehaviour
 {
     private UI_FadeEffect fadeEffect;
     [SerializeField] private GameObject[] UI_Elements;
-    [SerializeField] private string firstLevelName = "Level_1";
+    [SerializeField] private GameObject continueButton;
 
     private void Awake()
     {
+        SetEnableContinueButton();
         fadeEffect = GetComponentInChildren<UI_FadeEffect>();
     }
 
@@ -19,18 +20,6 @@ public class UI_MainMenu : MonoBehaviour
         fadeEffect.ScreenFade(0, 1.5f);
     }
 
-    /*
-    public void SwitchToFirstLevel()
-    {
-        fadeEffect.ScreenFade(1, 1.5f, LoadTheFirstLevel);
-    }
-
-    private void LoadTheFirstLevel()
-    {
-        SceneManager.LoadScene(firstLevelName);
-    }
-
-    */
 
     public void SwitchToCredits()
     {
@@ -50,5 +39,27 @@ public class UI_MainMenu : MonoBehaviour
         }
         UI_Element.SetActive(true);
     }
+
+    private void SetEnableContinueButton()
+    {
+        bool firstLevelPassed = PlayerPrefs.GetInt("Level2Unlocked", 0) == 1; // if player passed the first level, from now on, player can continue to the level.
+        if (firstLevelPassed)
+            continueButton.SetActive(true);
+        else
+            continueButton.SetActive(false);
+    }
+
+    public void SwitchToContinueLevel()
+    {
+        fadeEffect.ScreenFade(1, 1.5f, LoadContinueLevel);
+    }
+
+    public void LoadContinueLevel()
+    {
+        int lastContinueLevelIndex = GameManager.instance.lastContinueLevelIndex;
+        SceneManager.LoadScene("Level_" + lastContinueLevelIndex);
+    }
+
     
+
 }

@@ -3333,6 +3333,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63a0c45507f2c4b478c5bb458fe0c661, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lastContinueLevelIndex: 0
   player: {fileID: 0}
   playerPref: {fileID: 4673688601952692361, guid: 09efd75663d759e4dbabc98be0c8c330, type: 3}
   respawnPoint: {fileID: 109922154}
