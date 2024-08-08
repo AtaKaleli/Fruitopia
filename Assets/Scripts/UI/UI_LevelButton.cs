@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UI_LevelButton : MonoBehaviour
 {
 
     [SerializeField] private TextMeshProUGUI bestTimeText;
     [SerializeField] private TextMeshProUGUI fruitsText;
+  
 
     private int levelIndex;
     private string levelName;

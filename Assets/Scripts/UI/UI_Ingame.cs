@@ -25,6 +25,6 @@ public class UI_Ingame : MonoBehaviour
 
     public void UpdateTimer(float timer)
     {
-        timerText.text = timer.ToString("000") + " s";
+        timerText.text = timer.ToString("000");
     }
 }
