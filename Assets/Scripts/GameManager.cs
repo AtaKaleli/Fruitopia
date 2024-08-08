@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,10 +14,14 @@ public class GameManager : MonoBehaviour
     private int nextLevelIndex;
     public int lastContinueLevelIndex;
 
-    //Ingame UI
+    //Ingame UI and Fruit
     private UI_Ingame inGameUI;
     private float levelTimer;
     public int fruitsCollected;
+    public int totalFruits;
+    public Fruit[] allFruits;
+    public Box_Carbon[] allCarbonBoxes;
+    public Box_Steel[] allSteelBoxes;
 
 
     [Header("Player")]
@@ -45,7 +50,14 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        
+
+        allFruits = FindObjectsOfType<Fruit>();
+        allCarbonBoxes = FindObjectsOfType<Box_Carbon>();
+        allSteelBoxes = FindObjectsOfType<Box_Steel>();
+        totalFruits = allFruits.Length + (allCarbonBoxes.Length * 10) + (allSteelBoxes.Length * 10);
+
+        inGameUI.UpdateFruit(0, totalFruits);
+
         currentLevelIndex = SceneManager.GetActiveScene().buildIndex;
         nextLevelIndex = currentLevelIndex + 1;
         lastContinueLevelIndex = PlayerPrefs.GetInt("LastContinueLevelIndex");
@@ -65,7 +77,7 @@ public class GameManager : MonoBehaviour
     public void AddFruit()
     {
         fruitsCollected++;
-        inGameUI.UpdateFruit(fruitsCollected);
+        inGameUI.UpdateFruit(fruitsCollected,totalFruits);
     }
 
     public void UpdateRespawnPoint(Transform updatedRespawnPoint)

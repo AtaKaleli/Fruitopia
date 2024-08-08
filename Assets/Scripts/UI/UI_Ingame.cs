@@ -17,14 +17,10 @@ public class UI_Ingame : MonoBehaviour
         fadeEffect = GetComponentInChildren<UI_FadeEffect>();
     }
 
-    private void Start()
+    
+    public void UpdateFruit(int collectedFruits,int totalFruits)
     {
-        fruitText.text = "0";
-    }
-
-    public void UpdateFruit(int collectedFruits)
-    {
-        fruitText.text = collectedFruits.ToString(); 
+        fruitText.text = collectedFruits.ToString() + "/" + totalFruits.ToString(); 
     }
 
     public void UpdateTimer(float timer)
