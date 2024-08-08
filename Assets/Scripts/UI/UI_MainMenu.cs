@@ -56,7 +56,7 @@ public class UI_MainMenu : MonoBehaviour
 
     public void LoadContinueLevel()
     {
-        int lastContinueLevelIndex = GameManager.instance.lastContinueLevelIndex;
+        int lastContinueLevelIndex = PlayerPrefs.GetInt("LastContinueLevelIndex");
         SceneManager.LoadScene("Level_" + lastContinueLevelIndex);
     }
 

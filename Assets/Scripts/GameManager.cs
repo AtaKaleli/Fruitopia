@@ -42,7 +42,12 @@ public class GameManager : MonoBehaviour
         
         currentLevelIndex = SceneManager.GetActiveScene().buildIndex;
         nextLevelIndex = currentLevelIndex + 1;
-        lastContinueLevelIndex = currentLevelIndex; // this is the index of the last level that player played
+        lastContinueLevelIndex = PlayerPrefs.GetInt("LastContinueLevelIndex");
+        
+
+        if (currentLevelIndex > lastContinueLevelIndex)
+            PlayerPrefs.SetInt("LastContinueLevelIndex", currentLevelIndex); // this is the index of the last level that player played
+        
     }
 
     public void AddFruit()
