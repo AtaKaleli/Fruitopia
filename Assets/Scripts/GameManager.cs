@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,7 +12,12 @@ public class GameManager : MonoBehaviour
     private int currentLevelIndex;
     private int nextLevelIndex;
     public int lastContinueLevelIndex;
-    
+
+    //Ingame UI
+    private UI_Ingame inGameUI;
+    private float levelTimer;
+    public int fruitsCollected;
+
 
     [Header("Player")]
     public Player player;
@@ -19,7 +25,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform respawnPoint;
     
 
-    public int fruitsCollected;
 
 
     private void Awake()
@@ -34,7 +39,8 @@ public class GameManager : MonoBehaviour
         }
 
         RespawnPlayer(0f); // respawn the player at the beginning of the level
-        UI_Ingame.instance.fadeEffect.ScreenFade(0, 1f);
+        inGameUI = UI_Ingame.instance;
+        inGameUI.fadeEffect.ScreenFade(0, 1f);
     }
 
     private void Start()
@@ -50,9 +56,16 @@ public class GameManager : MonoBehaviour
         
     }
 
+    private void Update()
+    {
+        levelTimer += Time.deltaTime;
+        inGameUI.UpdateTimer(levelTimer);
+    }
+
     public void AddFruit()
     {
         fruitsCollected++;
+        inGameUI.UpdateFruit(fruitsCollected);
     }
 
     public void UpdateRespawnPoint(Transform updatedRespawnPoint)
@@ -91,11 +104,11 @@ public class GameManager : MonoBehaviour
         bool isGameOver = currentLevelIndex == lastIndex;
 
         if (isGameOver)
-            UI_Ingame.instance.fadeEffect.ScreenFade(1, 1.5f, LoadTheEndScene);
+            inGameUI.fadeEffect.ScreenFade(1, 1.5f, LoadTheEndScene);
         else
         {
             PlayerPrefs.SetInt("Level" + nextLevelIndex + "Unlocked", 1); // If the game is not end, this means we unlocked the next level
-            UI_Ingame.instance.fadeEffect.ScreenFade(1, 1.5f, LoadNextLevel);
+            inGameUI.fadeEffect.ScreenFade(1, 1.5f, LoadNextLevel);
         }
     }
 
