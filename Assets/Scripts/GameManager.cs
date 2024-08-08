@@ -51,21 +51,26 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
 
+        currentLevelIndex = SceneManager.GetActiveScene().buildIndex;
+        nextLevelIndex = currentLevelIndex + 1;
+        lastContinueLevelIndex = PlayerPrefs.GetInt("LastContinueLevelIndex");
+
+
+        if (currentLevelIndex > lastContinueLevelIndex)
+            PlayerPrefs.SetInt("LastContinueLevelIndex", currentLevelIndex); // this is the index of the last level that player played
+        
+        CollectFruitsInfo();
+    }
+
+    private void CollectFruitsInfo()
+    {
         allFruits = FindObjectsOfType<Fruit>();
         allCarbonBoxes = FindObjectsOfType<Box_Carbon>();
         allSteelBoxes = FindObjectsOfType<Box_Steel>();
         totalFruits = allFruits.Length + (allCarbonBoxes.Length * 10) + (allSteelBoxes.Length * 10);
 
         inGameUI.UpdateFruit(0, totalFruits);
-
-        currentLevelIndex = SceneManager.GetActiveScene().buildIndex;
-        nextLevelIndex = currentLevelIndex + 1;
-        lastContinueLevelIndex = PlayerPrefs.GetInt("LastContinueLevelIndex");
-        
-
-        if (currentLevelIndex > lastContinueLevelIndex)
-            PlayerPrefs.SetInt("LastContinueLevelIndex", currentLevelIndex); // this is the index of the last level that player played
-        
+        PlayerPrefs.SetInt("Level" + currentLevelIndex + "TotalFruits", totalFruits);
     }
 
     private void Update()
@@ -112,6 +117,10 @@ public class GameManager : MonoBehaviour
 
     public void LoadNextScene()
     {
+
+        SaveBestTime();
+        SaveFruitInfo();
+
         int lastIndex = SceneManager.sceneCountInBuildSettings - 2;
         bool isGameOver = currentLevelIndex == lastIndex;
 
@@ -124,5 +133,30 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    
+    private void SaveBestTime()
+    {   
+        float lastTime = PlayerPrefs.GetFloat("level" + currentLevelIndex + "BestTime", 999);
+
+        if(levelTimer < lastTime)
+            PlayerPrefs.SetFloat("level" + currentLevelIndex + "BestTime", levelTimer);
+    }
+
+    private void SaveFruitInfo()
+    {
+        
+        
+        int fruitsCollectedBefore = PlayerPrefs.GetInt("Level" + currentLevelIndex + "FruitsCollected");
+        if(fruitsCollectedBefore < fruitsCollected)
+        {
+            PlayerPrefs.SetInt("Level" + currentLevelIndex + "FruitsCollected", fruitsCollected);
+            
+        }
+
+        int totalFruitsInBank = PlayerPrefs.GetInt("TotalFruitsAmount");
+        PlayerPrefs.SetInt("TotalFruitsAmount", totalFruitsInBank + fruitsCollected);
+
+    }
+
+
+
 }
