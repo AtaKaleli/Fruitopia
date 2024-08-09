@@ -11,6 +11,7 @@ public class DeathZone : MonoBehaviour
         if (collision.GetComponent<Player>() != null)
         {
             Player player = collision.GetComponent<Player>();
+            player.Damage();
             player.Die();
             GameManager.instance.RespawnPlayer(1.5f);
         }

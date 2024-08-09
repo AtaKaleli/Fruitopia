@@ -92,6 +92,11 @@ public class GameManager : MonoBehaviour
 
     public void RespawnPlayer(float respawnWaitTime)
     {
+        DifficultyManager difficultyManager = DifficultyManager.instance;
+        if(difficultyManager != null && difficultyManager.difficulty == DifficultyType.Hard)
+        {
+            return;
+        }
         StartCoroutine(WaitForRespawn(respawnWaitTime));
     }
 
@@ -103,8 +108,15 @@ public class GameManager : MonoBehaviour
         player.SetCanMove(false);
     }
 
+    public void RestartLevel()
+    {
+        UI_Ingame.instance.fadeEffect.ScreenFade(1, .75f, LoadCurrentScene);
+    }
   
-
+    private void LoadCurrentScene()
+    {
+        SceneManager.LoadScene("Level_" + currentLevelIndex);
+    }
     private void LoadTheEndScene()
     {
         SceneManager.LoadScene("Credits");
@@ -157,6 +169,14 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void RemoveFruit()
+    {
+        fruitsCollected--;
+        inGameUI.UpdateFruit(fruitsCollected, totalFruits);
+    }
 
-
+    public int GetFruitsCollected()
+    {
+        return fruitsCollected;
+    }
 }

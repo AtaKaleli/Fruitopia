@@ -20,6 +20,15 @@ public class UI_MainMenu : MonoBehaviour
         fadeEffect.ScreenFade(0, 1.5f);
     }
 
+    public void SwitchToNewGame()
+    {
+        fadeEffect.ScreenFade(1, 1.5f, NewGame);
+    }
+
+    private void NewGame()
+    {
+        SceneManager.LoadScene("Level_1");
+    }
 
     public void SwitchToCredits()
     {

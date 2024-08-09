@@ -11,6 +11,7 @@ public class Damage : MonoBehaviour
         if (collision.GetComponent<Player>() != null)
         {
             Player player = collision.GetComponent<Player>();
+            player.Damage();
             player.KnockBack();
         }
 

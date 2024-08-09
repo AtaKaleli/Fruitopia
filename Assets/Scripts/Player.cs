@@ -4,7 +4,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 
-
+    private DifficultyType gameDifficulty;
+    private GameManager gameManager;
 
     private Rigidbody2D rb;
     private Animator anim;
@@ -63,11 +64,16 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        gameManager = GameManager.instance;
+
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        
+        UpdateGameDifficulty();
         UpdateSkin();
     }
 
+    
 
     void Update()
     {
@@ -100,6 +106,38 @@ public class Player : MonoBehaviour
 
         
     }
+
+
+    public void Damage()
+    {
+        if(gameDifficulty == DifficultyType.Normal)
+        {
+            if(gameManager.GetFruitsCollected() <= 0)
+            {
+                Die();
+                gameManager.RestartLevel();
+            }
+            else
+                gameManager.RemoveFruit();
+            
+            return;
+        }
+
+        if(gameDifficulty == DifficultyType.Hard)
+        {
+            Die();
+            gameManager.RestartLevel();
+        }
+    }
+
+    private void UpdateGameDifficulty()
+    {
+        DifficultyManager difficultyManager = DifficultyManager.instance;
+
+        if (difficultyManager != null)
+            gameDifficulty = difficultyManager.difficulty;
+    }
+
 
     public void UpdateSkin()
     {
