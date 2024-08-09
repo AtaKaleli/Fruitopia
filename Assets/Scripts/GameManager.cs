@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        RespawnPlayer(0f); // respawn the player at the beginning of the level
+        
         inGameUI = UI_Ingame.instance;
         inGameUI.fadeEffect.ScreenFade(0, 1f);
     }

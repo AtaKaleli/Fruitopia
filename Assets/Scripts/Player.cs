@@ -88,7 +88,7 @@ public class Player : MonoBehaviour
             canMove = true;
         }
 
-        if (canMove)
+        if (canMove && !UI_Ingame.instance.isPaused)
         {
             Move(1.0f);
         }
