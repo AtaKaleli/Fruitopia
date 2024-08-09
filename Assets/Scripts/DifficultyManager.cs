@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 
-public enum DifficultyType { Easy,Normal,Hard}
+public enum DifficultyType { Easy = 1, Normal, Hard }
 
 
 public class DifficultyManager : MonoBehaviour
@@ -27,6 +25,9 @@ public class DifficultyManager : MonoBehaviour
         difficulty = newDifficulty;
     }
 
-
+    public void LoadDifficulty(int difficultyIndex)
+    {
+        difficulty = (DifficultyType)difficultyIndex;
+    }
 
 }

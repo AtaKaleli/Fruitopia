@@ -22,12 +22,18 @@ public class UI_SkinSelection : MonoBehaviour
     [SerializeField] private TextMeshProUGUI priceText;
     [SerializeField] private TextMeshProUGUI buySelectText;
 
+    private UI_LevelSelection levelSelectionUI;
+    private UI_MainMenu mainMenuUI;
+
 
     private void Start()
     {
         
         UpdateSkinDisplay();
         LoadSkinUnlocks();
+
+        mainMenuUI = GetComponentInParent<UI_MainMenu>();
+        levelSelectionUI = mainMenuUI.GetComponentInChildren<UI_LevelSelection>(true);
     }
 
     public void NextSkin()
@@ -82,8 +88,6 @@ public class UI_SkinSelection : MonoBehaviour
             string skinName = skinList[i].skinName;
             bool skinUnlocked = PlayerPrefs.GetInt(skinName + "Unlocked", 0) == 1;
 
-            print(skinName);
-            print(skinUnlocked);
 
             if (skinUnlocked || i== 0)
                 skinList[i].unlocked = true;
@@ -112,7 +116,11 @@ public class UI_SkinSelection : MonoBehaviour
         if (skinList[skinIndex].unlocked == false)
             BuySkin(skinIndex);
         else
+        {
             SkinManager.instance.SetSkinId(skinIndex);
+            mainMenuUI.SwicthToUI(levelSelectionUI.gameObject);
+
+        }
 
         UpdateSkinDisplay();
     }
