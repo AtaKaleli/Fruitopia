@@ -291,6 +291,7 @@ public class Player : MonoBehaviour
         isKnocked = true;
         canBeKnockable = false;
         anim.SetTrigger("isKnocked");
+        gameManager.ScreenShake(-facingDirection);
         rb.velocity = new Vector2(knockBackDirection.x * -facingDirection, knockBackDirection.y);
         yield return new WaitForSeconds(knockBackTime);
         isKnocked = false;

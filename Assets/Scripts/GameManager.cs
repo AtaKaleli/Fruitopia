@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -7,6 +8,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    
 
     public static GameManager instance;
 
@@ -28,8 +30,8 @@ public class GameManager : MonoBehaviour
     public Player player;
     [SerializeField] private GameObject playerPref;
     [SerializeField] private Transform respawnPoint;
-    
-
+    [SerializeField] private CinemachineImpulseSource impulse;
+    [SerializeField] private Vector2 shakeDirection;
 
 
     private void Awake()
@@ -179,4 +181,11 @@ public class GameManager : MonoBehaviour
     {
         return fruitsCollected;
     }
+
+    public void ScreenShake(int facingDirection)
+    {
+        impulse.m_DefaultVelocity = new Vector2(shakeDirection.x * facingDirection, shakeDirection.y);
+        impulse.GenerateImpulse();
+    }
+
 }
