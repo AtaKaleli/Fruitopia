@@ -27,6 +27,8 @@ public class Bat : Enemy
     {
         base.Start();
         transform.position = new Vector2(movePoints[0].position.x, movePoints[0].position.y - 0.6f);
+        playerTransform = FindObjectOfType<Player>().transform;
+
     }
 
     void Update()
@@ -151,5 +153,19 @@ public class Bat : Enemy
         {
             aggressiveTimeCounter = -1;
         }
+    }
+
+    private void UpdatePlayerTransform()
+    {
+        playerTransform = FindObjectOfType<Player>().transform;
+    }
+    private void OnEnable()
+    {
+        GameManager.OnPlayerRespawn += UpdatePlayerTransform;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.OnPlayerRespawn -= UpdatePlayerTransform;
     }
 }

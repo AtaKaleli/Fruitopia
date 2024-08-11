@@ -6,12 +6,24 @@ using Cinemachine;
 public class CameraManager : MonoBehaviour
 {
     [SerializeField] private GameObject myCamera;
-
     private void Start()
     {
-        myCamera.GetComponent<CinemachineVirtualCamera>().Follow = GameObject.Find("Player").transform;
+        myCamera.GetComponent<CinemachineVirtualCamera>().Follow = FindObjectOfType<Player>().transform;
+
+    }
+    private void UpdateCameraFollow()
+    {
+        myCamera.GetComponent<CinemachineVirtualCamera>().Follow = FindObjectOfType<Player>().transform;
+    }
+    private void OnEnable()
+    {
+        GameManager.OnPlayerRespawn += UpdateCameraFollow;
     }
 
+    private void OnDisable()
+    {
+        GameManager.OnPlayerRespawn -= UpdateCameraFollow;
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

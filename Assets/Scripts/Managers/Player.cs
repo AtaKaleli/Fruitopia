@@ -1,8 +1,11 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+
+    
 
     private DifficultyType gameDifficulty;
     private GameManager gameManager;
@@ -72,6 +75,7 @@ public class Player : MonoBehaviour
         
         UpdateGameDifficulty();
         UpdateSkin();
+        StartingPoint();
     }
 
     
@@ -108,7 +112,10 @@ public class Player : MonoBehaviour
         
     }
 
-
+    private void StartingPoint()
+    {
+        transform.position = gameManager.respawnPoint.position;
+    }
     public void Damage()
     {
         if(gameDifficulty == DifficultyType.Normal)

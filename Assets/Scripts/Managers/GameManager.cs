@@ -5,11 +5,11 @@ using System.Threading;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
 
 public class GameManager : MonoBehaviour
 {
-    
-
+    public static event Action OnPlayerRespawn;
     public static GameManager instance;
 
     private int currentLevelIndex;
@@ -29,9 +29,11 @@ public class GameManager : MonoBehaviour
     [Header("Player")]
     public Player player;
     [SerializeField] private GameObject playerPref;
-    [SerializeField] private Transform respawnPoint;
+    public Transform respawnPoint;
     [SerializeField] private CinemachineImpulseSource impulse;
     [SerializeField] private Vector2 shakeDirection;
+
+    
 
 
     private void Awake()
@@ -52,7 +54,6 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-
         currentLevelIndex = SceneManager.GetActiveScene().buildIndex;
         nextLevelIndex = currentLevelIndex + 1;
         lastContinueLevelIndex = PlayerPrefs.GetInt("LastContinueLevelIndex");
@@ -61,8 +62,11 @@ public class GameManager : MonoBehaviour
         if (currentLevelIndex > lastContinueLevelIndex)
             PlayerPrefs.SetInt("LastContinueLevelIndex", currentLevelIndex); // this is the index of the last level that player played
         
+        
         CollectFruitsInfo();
     }
+
+   
 
     private void CollectFruitsInfo()
     {
@@ -108,7 +112,9 @@ public class GameManager : MonoBehaviour
         AudioManager.instance.PlaySFX(10);
         GameObject newPlayer = Instantiate(playerPref, respawnPoint.position, Quaternion.identity);
         player = newPlayer.GetComponent<Player>();
+        OnPlayerRespawn?.Invoke();
         player.SetCanMove(false);
+       
     }
 
     public void RestartLevel()
@@ -185,8 +191,23 @@ public class GameManager : MonoBehaviour
 
     public void ScreenShake(int facingDirection)
     {
+        
         impulse.m_DefaultVelocity = new Vector2(shakeDirection.x * facingDirection, shakeDirection.y);
         impulse.GenerateImpulse();
+    }
+
+    private void UpdateCameraImpulseFollow()
+    {
+        impulse = player.GetComponent<CinemachineImpulseSource>();
+    }
+    private void OnEnable()
+    {
+        GameManager.OnPlayerRespawn += UpdateCameraImpulseFollow;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.OnPlayerRespawn -= UpdateCameraImpulseFollow;
     }
 
 }

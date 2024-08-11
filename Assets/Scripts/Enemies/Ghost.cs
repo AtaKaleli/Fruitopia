@@ -1,3 +1,4 @@
+using Cinemachine;
 using Microsoft.Unity.VisualStudio.Editor;
 using System.Collections;
 using System.Collections.Generic;
@@ -21,7 +22,10 @@ public class Ghost : Enemy
     {
         base.Start();
         transform.position = idlePoint.position;
+        playerTransform = FindObjectOfType<Player>().transform;
         sr = GetComponent<SpriteRenderer>();
+        
+
         
     }
 
@@ -32,6 +36,8 @@ public class Ghost : Enemy
         CollisionChecks();
         
     }
+
+    
 
     protected override void CollisionChecks()
     {
@@ -50,7 +56,12 @@ public class Ghost : Enemy
     private void MovementController()
     {
         ColorAlphaController();
-        
+
+        if(playerTransform == null)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, idlePoint.position, moveSpeed * Time.deltaTime);
+        }
+
         if (Vector2.Distance(transform.position, idlePoint.position) < 0.1f)
         {
             isAggressive = true;
@@ -70,6 +81,9 @@ public class Ghost : Enemy
 
     private void FlipController()
     {
+        if (playerTransform == null)
+            return;
+
         if (transform.position.x - playerTransform.position.x < 0 && facingDirection == -1)
         {
             Flip();
@@ -95,5 +109,20 @@ public class Ghost : Enemy
             isAggressive = false;
         }
     }
+
+    private void UpdatePlayerTransform()
+    {
+        playerTransform = FindObjectOfType<Player>().transform;
+    }
+    private void OnEnable()
+    {
+        GameManager.OnPlayerRespawn += UpdatePlayerTransform;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.OnPlayerRespawn -= UpdatePlayerTransform;
+    }
+
 
 }

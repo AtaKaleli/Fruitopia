@@ -30,6 +30,7 @@ public class Enemy : Damage
     [SerializeField] protected LayerMask whatIsGround;
     protected bool isGrounded;
 
+
     protected virtual void Start()
     {
         rb = GetComponent<Rigidbody2D>();
