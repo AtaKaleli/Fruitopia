@@ -17,6 +17,8 @@ public class CheckPoint : MonoBehaviour
     {
         if(collision.GetComponent<Player>() != null && canBeActivated)
         {
+            AudioManager.instance.PlaySFX(11);
+
             anim.SetTrigger("hitCheckPoint");
             GameManager.instance.UpdateRespawnPoint(transform);
             canBeActivated = false;

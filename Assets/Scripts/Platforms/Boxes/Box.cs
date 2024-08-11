@@ -15,11 +15,15 @@ public class Box : MonoBehaviour
 
     public virtual void Damage()
     {
+        
+       AudioManager.instance.PlaySFX(9);
+       
         hitPoint--;
         anim.SetTrigger("gotHit");
 
         if (hitPoint == 0)
         {
+            
             DestroyMe();
         }
     }

@@ -8,6 +8,7 @@ public class RespawnPoint : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
+        AudioManager.instance.PlayRandomBGM();
     }
 
     private void OnTriggerExit2D(Collider2D collision)

@@ -172,6 +172,7 @@ public class Player : MonoBehaviour
 
     private void Jump(float jumpForce)
     {
+        AudioManager.instance.PlaySFX(3);
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
     }
 
@@ -200,6 +201,7 @@ public class Player : MonoBehaviour
 
                 if (rb.velocity.y < 0)
                 {
+                    AudioManager.instance.PlaySFX(2);
                     enemy.Damage();
                     Jump(jumpForce);
                 }
@@ -275,6 +277,7 @@ public class Player : MonoBehaviour
     
     public void Die()
     {
+        AudioManager.instance.PlaySFX(0);
         Destroy(gameObject);
         GameObject newDisappearVFX = Instantiate(disappearVFXPref, transform.position, Quaternion.identity);
     }
@@ -289,6 +292,7 @@ public class Player : MonoBehaviour
 
     IEnumerator KnockbackController()
     {
+        AudioManager.instance.PlaySFX(0);
         isKnocked = true;
         canBeKnockable = false;
         anim.SetTrigger("isKnocked");

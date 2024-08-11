@@ -9,29 +9,41 @@ public class UI_MainMenu : MonoBehaviour
     [SerializeField] private GameObject[] UI_Elements;
     [SerializeField] private GameObject continueButton;
 
+    [SerializeField] private UI_Settings[] volumeController;
+
     private void Awake()
     {
         SetEnableContinueButton();
         fadeEffect = GetComponentInChildren<UI_FadeEffect>();
+        AudioManager.instance.PlayBGM(0);
     }
 
     private void Start()
     {
+        for (int i = 0; i < volumeController.Length; i++)
+        {
+            volumeController[i].GetComponent<UI_Settings>().SetupVolumeSlider();
+        }
+
         fadeEffect.ScreenFade(0, 1.5f);
     }
 
     public void SwitchToNewGame()
     {
+        
         fadeEffect.ScreenFade(1, 1.5f, NewGame);
+        
     }
 
     private void NewGame()
     {
         SceneManager.LoadScene("Level_1");
+        
     }
 
     public void SwitchToCredits()
     {
+        AudioManager.instance.PlaySFX(4, false);
         fadeEffect.ScreenFade(1, 1.5f, LoadTheCreditsScene);
     }
 
@@ -47,6 +59,7 @@ public class UI_MainMenu : MonoBehaviour
             ui.SetActive(false);
         }
         UI_Element.SetActive(true);
+        AudioManager.instance.PlaySFX(4,false);
     }
 
     private void SetEnableContinueButton()
@@ -60,7 +73,9 @@ public class UI_MainMenu : MonoBehaviour
 
     public void SwitchToContinueLevel()
     {
+       
         fadeEffect.ScreenFade(1, 1.5f, LoadContinueLevel);
+        
     }
 
     public void LoadContinueLevel()

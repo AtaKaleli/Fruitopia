@@ -105,6 +105,7 @@ public class GameManager : MonoBehaviour
     IEnumerator WaitForRespawn(float respawnWaitTime)
     {
         yield return new WaitForSeconds(respawnWaitTime);
+        AudioManager.instance.PlaySFX(10);
         GameObject newPlayer = Instantiate(playerPref, respawnPoint.position, Quaternion.identity);
         player = newPlayer.GetComponent<Player>();
         player.SetCanMove(false);

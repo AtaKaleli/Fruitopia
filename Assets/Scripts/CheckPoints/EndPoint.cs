@@ -15,6 +15,7 @@ public class EndPoint : MonoBehaviour
     {
         if(collision.GetComponent<Player>() != null)
         {
+            AudioManager.instance.PlaySFX(2);
             anim.SetTrigger("reached");
             GameManager.instance.LoadNextScene();
         }

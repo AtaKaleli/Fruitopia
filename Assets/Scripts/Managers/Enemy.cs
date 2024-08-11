@@ -92,6 +92,7 @@ public class Enemy : Damage
 
     public virtual void Damage()
     {
+        
         anim.SetTrigger("gotHit");   
     }
 

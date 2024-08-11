@@ -15,6 +15,8 @@ public class Trampoline : MonoBehaviour
     {
         if(collision.GetComponent<Player>() != null)
         {
+            AudioManager.instance.PlaySFX(12);
+
             Rigidbody2D playerRb = collision.GetComponent<Rigidbody2D>();
             playerRb.velocity = new Vector2(playerRb.velocity.x, pushForce);
             anim.SetTrigger("gotHit");
