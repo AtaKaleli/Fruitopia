@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 
     private DifficultyType gameDifficulty;
     private GameManager gameManager;
+   
 
     private Rigidbody2D rb;
     private Animator anim;
@@ -65,7 +66,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         gameManager = GameManager.instance;
-
+        
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         
