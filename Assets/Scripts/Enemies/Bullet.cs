@@ -29,7 +29,11 @@ public class Bullet : Damage
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
         base.OnTriggerEnter2D(collision);
-        if(collision.GetComponent<Bullet>() == null)
+        if(collision.tag != "EndPoint")
             Destroy(gameObject);
+
+           
+            
+            
     }
 }

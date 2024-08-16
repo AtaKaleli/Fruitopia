@@ -175,7 +175,7 @@ MonoBehaviour:
   idleTime: 2
   isInvincible: 0
   wallCheck: {fileID: 2161566778898193469}
-  wallCheckDistance: 1.2
+  wallCheckDistance: 1.37
   whatIsWall:
     serializedVersion: 2
     m_Bits: 64

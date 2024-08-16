@@ -11,7 +11,7 @@ public class Plant : Enemy
     [Header("Attack Information")]
     [SerializeField] protected GameObject bulletPref;
     [SerializeField] protected Transform bulletOrigin;
-    [SerializeField] protected float bulletSpeedX;
+    [SerializeField] protected float bulletSpeedX = 8.0f;
     [SerializeField] protected float bulletSpeedY;
     [SerializeField] protected float attackTime;
     [SerializeField] private bool isFacingRight;

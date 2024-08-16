@@ -64,4 +64,15 @@ public class UI_Ingame : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
+    public void SwitchToRestartLevel()
+    {
+        Time.timeScale = 1;
+        fadeEffect.ScreenFade(1, 0f, RestartLevel);
+    }
+
+    public void RestartLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
 }

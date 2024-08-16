@@ -98,7 +98,7 @@ public class Player : MonoBehaviour
             Move(1.0f);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow))
         {
             JumpController();
         }
@@ -337,7 +337,7 @@ public class Player : MonoBehaviour
         }
         else if (collision.CompareTag("Ground_Sand"))
         {
-            SandMudIceController(true, false, 0.5f, 0f);
+            SandMudIceController(true, false, 0.4f, 0f);
         }
     }
 

@@ -221,7 +221,8 @@ MonoBehaviour:
   playerDetectionDistance: 15
   bulletPref: {fileID: 4519704022161056872, guid: 313e44a28f506634194441545b6256fd, type: 3}
   bulletOrigin: {fileID: 7031382039041582650}
-  bulletSpeed: 5
+  bulletSpeedX: 8
+  bulletSpeedY: 0
   attackTime: 1.5
   isFacingRight: 0
 --- !u!1 &7031382038212324437

@@ -8,6 +8,7 @@ TagManager:
   - Ground_Sand
   - Ground_Ice
   - Ground_Mud
+  - EndPoint
   layers:
   - Default
   - TransparentFX

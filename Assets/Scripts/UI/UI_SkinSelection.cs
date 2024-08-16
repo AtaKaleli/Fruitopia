@@ -42,7 +42,7 @@ public class UI_SkinSelection : MonoBehaviour
         if (skinIndex > maxIndex)
             skinIndex = 0;
 
-        AudioManager.instance.PlaySFX(5);
+        AudioManager.instance.PlaySFX(5, false);
         UpdateSkinDisplay();
     }
 
@@ -52,7 +52,7 @@ public class UI_SkinSelection : MonoBehaviour
         if (skinIndex < 0)
             skinIndex = maxIndex;
 
-        AudioManager.instance.PlaySFX(5);
+        AudioManager.instance.PlaySFX(5,false);
         UpdateSkinDisplay();
     }
 
