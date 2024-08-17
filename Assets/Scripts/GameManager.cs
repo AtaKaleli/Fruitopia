@@ -39,6 +39,8 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        
+
         if(instance == null)
         {
             instance = this;
@@ -48,9 +50,9 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        
         inGameUI = UI_Ingame.instance;
         inGameUI.fadeEffect.ScreenFade(0, 1f);
+        
     }
 
     private void Start()

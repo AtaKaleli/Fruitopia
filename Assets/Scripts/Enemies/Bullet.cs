@@ -10,8 +10,9 @@ public class Bullet : Damage
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        
-        
+        Destroy(gameObject, 3f);
+
+
     }
 
     // Update is called once per frame
@@ -29,11 +30,7 @@ public class Bullet : Damage
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
         base.OnTriggerEnter2D(collision);
-        if(collision.tag != "EndPoint")
+        if (collision.tag != "Endpoint")
             Destroy(gameObject);
-
-           
-            
-            
     }
 }

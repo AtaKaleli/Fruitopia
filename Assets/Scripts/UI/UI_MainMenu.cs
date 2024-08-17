@@ -16,6 +16,7 @@ public class UI_MainMenu : MonoBehaviour
         SetEnableContinueButton();
         fadeEffect = GetComponentInChildren<UI_FadeEffect>();
         //AudioManager.instance.PlayBGM(0);
+       
     }
 
     private void Start()

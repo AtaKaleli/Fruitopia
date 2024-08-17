@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8635021929715632673}
   - component: {fileID: 5294554736204493997}
   - component: {fileID: 1985781619065638120}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bullet_Bee
   m_TagString: Untagged
   m_Icon: {fileID: 0}

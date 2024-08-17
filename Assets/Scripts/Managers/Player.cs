@@ -162,6 +162,8 @@ public class Player : MonoBehaviour
     {
         float horizontalInput = Input.GetAxisRaw("Horizontal");
         rb.velocity = new Vector2(horizontalInput * moveSpeed * speedMultiplier, rb.velocity.y);
+
+        
     }
 
     private void JumpController()
@@ -242,7 +244,15 @@ public class Player : MonoBehaviour
 
     private void WallSlideController()
     {
-        if (isWallDetected && rb.velocity.y < 0)
+        float verticalInput = Input.GetAxis("Vertical");
+
+        if (verticalInput < 0)
+        {
+            print("yesss");
+            isWallSliding = false;
+        } // if player pressed S , which means go down, then the wall sliding is interrupted
+
+        else if (isWallDetected && rb.velocity.y < 0)
         {
             isWallSliding = true;
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.1f);
