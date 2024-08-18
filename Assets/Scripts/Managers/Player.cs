@@ -24,14 +24,16 @@ public class Player : MonoBehaviour
     private bool canDoubleJump = true;
     private bool isFacingRight = true;
     [HideInInspector] public int facingDirection = 1;
-
+    [HideInInspector] public bool canJump = true;
+    
 
     [Header("Knockback Information")]
     [SerializeField] private float knockBackTime;
     [SerializeField] private Vector2 knockBackDirection;
     private bool isKnocked;
     [SerializeField] private float untouchableTime;
-    private bool canBeKnockable = true;
+    [HideInInspector]
+    public bool canBeKnockable = true;
     
 
 
@@ -93,6 +95,7 @@ public class Player : MonoBehaviour
         {
             canDoubleJump = true;
             canMove = true;
+            canJump = true;
         }
 
         if (canMove && !UI_Ingame.instance.isPaused)
@@ -102,6 +105,8 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
         {
+            if (!canJump)
+                return;
             JumpController();
         }
 

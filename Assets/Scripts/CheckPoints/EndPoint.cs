@@ -15,6 +15,8 @@ public class EndPoint : MonoBehaviour
     {
         if(collision.GetComponent<Player>() != null)
         {
+            Player player = collision.GetComponent<Player>();
+            player.canBeKnockable = false;
             AudioManager.instance.PlaySFX(2);
             anim.SetTrigger("reached");
             GameManager.instance.LoadNextScene();

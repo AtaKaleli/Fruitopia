@@ -33,9 +33,9 @@ public class Arrow : MonoBehaviour
             platformPosition = transform.position;
             Rigidbody2D playerRb = collision.GetComponent<Rigidbody2D>();
             collision.GetComponent<Player>().SetCanMove(false);
+            collision.GetComponent<Player>().canJump = false;
             playerRb.velocity = arrowForce;
             anim.SetTrigger("gotHit");
-            
             
         }
    
