@@ -121,12 +121,14 @@ public class Player : MonoBehaviour
     }
     public void Damage()
     {
+  
+
         if(gameDifficulty == DifficultyType.Normal)
         {
             if(gameManager.GetFruitsCollected() <= 0)
             {
                 Die();
-                gameManager.RestartLevel();
+                GameManager.instance.RespawnPlayer(1f);
             }
             else
                 gameManager.RemoveFruit();
@@ -137,7 +139,7 @@ public class Player : MonoBehaviour
         if(gameDifficulty == DifficultyType.Hard)
         {
             Die();
-            gameManager.RestartLevel();
+            GameManager.instance.RespawnPlayer(1f);
         }
     }
     private void InputChecks()
@@ -216,7 +218,7 @@ public class Player : MonoBehaviour
                     return;
                 }
 
-                if (rb.velocity.y < 0)
+                if (rb.velocity.y <= 0.1f)
                 {
                     AudioManager.instance.PlaySFX(2);
                     enemy.Damage();

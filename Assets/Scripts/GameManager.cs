@@ -126,10 +126,7 @@ public class GameManager : MonoBehaviour
     public void RespawnPlayer(float respawnWaitTime)
     {
         DifficultyManager difficultyManager = DifficultyManager.instance;
-        if(difficultyManager != null && difficultyManager.difficulty == DifficultyType.Hard)
-        {
-            return;
-        }
+    
         StartCoroutine(WaitForRespawn(respawnWaitTime));
     }
 

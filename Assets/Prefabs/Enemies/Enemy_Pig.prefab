@@ -160,8 +160,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ea8e265b2754354e9c69612bc9ef949, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 4
+  moveSpeed: 5
   idleTime: 2
+  isInvincible: 0
   wallCheck: {fileID: 1899381208207674502}
   wallCheckDistance: 1.2
   whatIsWall:
