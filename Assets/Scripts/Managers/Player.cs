@@ -17,6 +17,8 @@ public class Player : MonoBehaviour
     [Header("Player Movement")]
     [SerializeField] private float moveSpeed;
     [SerializeField] private float jumpForce;
+    private float verticalInput;
+    private float horizontalInput;
     private bool walkingSandMudIce;
     private bool canMove = true;
     private bool canDoubleJump = true;
@@ -98,11 +100,12 @@ public class Player : MonoBehaviour
             Move(1.0f);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
         {
             JumpController();
         }
 
+        InputChecks();
         CollisionChecks();
         EnemyChecks();
         WallSlideController();
@@ -114,7 +117,7 @@ public class Player : MonoBehaviour
 
     private void StartingPoint()
     {
-        transform.position = gameManager.respawnPoint.position;
+        //transform.position = gameManager.respawnPoint.position;
     }
     public void Damage()
     {
@@ -136,6 +139,11 @@ public class Player : MonoBehaviour
             Die();
             gameManager.RestartLevel();
         }
+    }
+    private void InputChecks()
+    {
+         verticalInput = Input.GetAxis("Vertical");
+         horizontalInput = Input.GetAxisRaw("Horizontal");
     }
 
     private void UpdateGameDifficulty()
@@ -160,7 +168,7 @@ public class Player : MonoBehaviour
 
     private void Move(float speedMultiplier)
     {
-        float horizontalInput = Input.GetAxisRaw("Horizontal");
+        
         rb.velocity = new Vector2(horizontalInput * moveSpeed * speedMultiplier, rb.velocity.y);
 
         
@@ -248,7 +256,7 @@ public class Player : MonoBehaviour
 
         if (verticalInput < 0)
         {
-            print("yesss");
+            
             isWallSliding = false;
         } // if player pressed S , which means go down, then the wall sliding is interrupted
 

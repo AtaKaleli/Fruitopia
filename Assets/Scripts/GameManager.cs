@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
     {
         
 
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
         }
@@ -50,19 +50,27 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        inGameUI = UI_Ingame.instance;
-        inGameUI.fadeEffect.ScreenFade(0, 1f);
-        
+        if (player == null)
+            player = FindObjectOfType<Player>();
+        if (impulse == null)
+            impulse = player.GetComponent<CinemachineImpulseSource>();
+
     }
 
     private void Start()
     {
+        
+
+        inGameUI = UI_Ingame.instance;
+        inGameUI.fadeEffect.ScreenFade(0, 1f);
+
         currentLevelIndex = SceneManager.GetActiveScene().buildIndex;
         nextLevelIndex = currentLevelIndex + 1;
         lastContinueLevelIndex = PlayerPrefs.GetInt("LastContinueLevelIndex");
 
         if (respawnPoint == null)
             respawnPoint = FindObjectOfType<RespawnPoint>().transform;
+        
 
 
         if (currentLevelIndex > lastContinueLevelIndex)
@@ -79,6 +87,9 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        if (inGameUI == null)
+            return;
+
         levelTimer += Time.deltaTime;
         inGameUI.UpdateTimer(levelTimer);
     }
@@ -218,6 +229,7 @@ public class GameManager : MonoBehaviour
 
     private void UpdateCameraImpulseFollow()
     {
+        
         impulse = player.GetComponent<CinemachineImpulseSource>();
     }
     private void OnEnable()
