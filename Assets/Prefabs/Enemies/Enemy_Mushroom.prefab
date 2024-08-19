@@ -203,6 +203,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 3
   idleTime: 2
+  isInvincible: 0
   wallCheck: {fileID: 3977136488555704177}
   wallCheckDistance: 0.85
   whatIsWall:
@@ -258,7 +259,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.31188512}
+  m_Offset: {x: 0.0065865517, y: -0.31188512}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -269,7 +270,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.6072733, y: 1.3465495}
+  m_Size: {x: 1.6949759, y: 1.3465495}
   m_EdgeRadius: 0
 --- !u!1 &3977136490564707807
 GameObject:

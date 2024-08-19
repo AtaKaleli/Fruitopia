@@ -125,7 +125,7 @@ public class GameManager : MonoBehaviour
 
     public void RespawnPlayer(float respawnWaitTime)
     {
-        DifficultyManager difficultyManager = DifficultyManager.instance;
+        
     
         StartCoroutine(WaitForRespawn(respawnWaitTime));
     }
@@ -138,7 +138,7 @@ public class GameManager : MonoBehaviour
         player = newPlayer.GetComponent<Player>();
         OnPlayerRespawn?.Invoke();
         player.SetCanMove(false);
-       
+        player.canBeRespawnable = true;
     }
 
 

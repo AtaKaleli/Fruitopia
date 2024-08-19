@@ -14,8 +14,12 @@ public class DeathZone : MonoBehaviour
             player.Damage();
             player.Die();
             DifficultyManager difficultyManager = DifficultyManager.instance;
+            
             if(difficultyManager.difficulty == DifficultyType.Easy)
+            {
+                
                 GameManager.instance.RespawnPlayer(1f);
+            }
         }
 
 

@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float untouchableTime;
     [HideInInspector]
     public bool canBeKnockable = true;
-    
+    public bool canBeRespawnable = true;
 
 
     [Header("Collision Checks - Ground")]
@@ -132,8 +132,10 @@ public class Player : MonoBehaviour
         {
             if(gameManager.GetFruitsCollected() <= 0)
             {
+                
                 Die();
                 GameManager.instance.RespawnPlayer(1f);
+
             }
             else
                 gameManager.RemoveFruit();
@@ -141,8 +143,9 @@ public class Player : MonoBehaviour
             return;
         }
 
-        if(gameDifficulty == DifficultyType.Hard)
+        if(gameDifficulty == DifficultyType.Hard && canBeRespawnable)
         {
+            canBeRespawnable = false;
             Die();
             GameManager.instance.RespawnPlayer(1f);
         }
