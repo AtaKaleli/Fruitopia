@@ -11,15 +11,9 @@ public class DeathZone : MonoBehaviour
         if (collision.GetComponent<Player>() != null)
         {
             Player player = collision.GetComponent<Player>();
-            player.Damage();
             player.Die();
-            DifficultyManager difficultyManager = DifficultyManager.instance;
-            
-            if(difficultyManager.difficulty == DifficultyType.Easy)
-            {
-                
-                GameManager.instance.RespawnPlayer(1f);
-            }
+            GameManager.instance.RespawnPlayer(1f);
+
         }
 
 

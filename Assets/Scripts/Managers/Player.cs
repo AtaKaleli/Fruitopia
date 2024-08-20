@@ -67,6 +67,7 @@ public class Player : MonoBehaviour
     [SerializeField] private int skinID;
     //we used animatorOverrideController for skin selection.It allows to override different animations of player
     [SerializeField] private AnimatorOverrideController[] animators;
+    
 
     [Header("FruitDrop")]
     [SerializeField] private GameObject fruitDroppedByPref;
@@ -95,6 +96,7 @@ public class Player : MonoBehaviour
 
         if ((isGrounded || isWallSliding) && !walkingSandMudIce)
         {
+            
             canDoubleJump = true;
             canMove = true;
             canJump = true;
@@ -128,7 +130,8 @@ public class Player : MonoBehaviour
     }
     public void Damage()
     {
-  
+        
+        
 
         if(gameDifficulty == DifficultyType.Normal)
         {

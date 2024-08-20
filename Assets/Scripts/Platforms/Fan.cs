@@ -14,8 +14,12 @@ public class Fan : MonoBehaviour
     private float idleTimeCounter;
     private bool isWorking;
 
+    [SerializeField] private ParticleSystem dustFX;
+    
+
     void Start()
     {
+        dustFX = GetComponentInChildren<ParticleSystem>();
         bc = GetComponent<BoxCollider2D>();
         anim = GetComponent<Animator>();
         idleTimeCounter = idleTime;
@@ -29,18 +33,23 @@ public class Fan : MonoBehaviour
     void Update()
     {
         idleTimeCounter -= Time.deltaTime;
-        
 
+        
         if (idleTimeCounter < 0)
         {
             bc.enabled = true;
             isWorking = true;
+            if(!dustFX.isPlaying)
+                dustFX.Play();
         }
         else
         {
             isWorking = false;
             bc.enabled = false;
+            if(dustFX.isPlaying)
+                dustFX.Stop();
         }
+
 
         FanController();
         anim.SetBool("isWorking", isWorking);

@@ -12,11 +12,12 @@ public class FallingPlatform : MonoBehaviour
     [SerializeField] private float fallDistance;
     private float fallTimeCounter;
     private bool isFalling;
-
+    [SerializeField] private ParticleSystem dustFX;
 
     void Start()
     {
-        anim = GetComponent<Animator>();    
+        anim = GetComponent<Animator>();
+        dustFX.Play();
     }
 
     
@@ -36,6 +37,9 @@ public class FallingPlatform : MonoBehaviour
         if(collision.gameObject.GetComponent<Player>() != null)
         {
             isWorking = false;
+            if (dustFX.isPlaying)
+                dustFX.Stop();
+
             StartCoroutine(FallPlatform());
             
         }
