@@ -25,7 +25,11 @@ public class Player : MonoBehaviour
     private bool isFacingRight = true;
     [HideInInspector] public int facingDirection = 1;
     [HideInInspector] public bool canJump = true;
-    
+
+    [Header("Cayote Jump")]
+    [SerializeField] private float cayoteJumpTime;//allow jump for a few sec even if player on air
+    private float cayoteJumpCounter;
+    private bool canHaveCayoteJump;
 
     [Header("Knockback Information")]
     [SerializeField] private float knockBackTime;
@@ -89,6 +93,9 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+
+        cayoteJumpCounter -= Time.deltaTime;
+
         if (isKnocked)
         {
             return;
@@ -100,6 +107,15 @@ public class Player : MonoBehaviour
             canDoubleJump = true;
             canMove = true;
             canJump = true;
+            canHaveCayoteJump = true;
+        }
+        else
+        {
+            if (canHaveCayoteJump)
+            {
+                canHaveCayoteJump = false;
+                cayoteJumpCounter = cayoteJumpTime;
+            }
         }
 
         if (canMove && !UI_Ingame.instance.isPaused)
@@ -194,7 +210,7 @@ public class Player : MonoBehaviour
 
     private void JumpController()
     {
-        if (isWallSliding || isGrounded)
+        if (isWallSliding || isGrounded || cayoteJumpCounter > 0)
         {
             Jump(jumpForce);
         }
