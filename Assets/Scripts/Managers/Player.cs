@@ -66,8 +66,10 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject disappearVFXPref;
     [SerializeField] private int skinID;
     //we used animatorOverrideController for skin selection.It allows to override different animations of player
-    [SerializeField] private AnimatorOverrideController[] animators; 
+    [SerializeField] private AnimatorOverrideController[] animators;
 
+    [Header("FruitDrop")]
+    [SerializeField] private GameObject fruitDroppedByPref;
 
 
     void Start()
@@ -138,7 +140,10 @@ public class Player : MonoBehaviour
 
             }
             else
+            {
+                Instantiate(fruitDroppedByPref, transform.position, Quaternion.identity);
                 gameManager.RemoveFruit();
+            }
             
             return;
         }

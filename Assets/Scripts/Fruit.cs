@@ -4,17 +4,19 @@ using UnityEngine;
 
 public class Fruit : MonoBehaviour
 {
-    private Animator anim;
-    private Rigidbody2D rb;
+    protected Animator anim;
+    protected Rigidbody2D rb;
+    protected SpriteRenderer sr;
 
     [SerializeField] private GameObject collectedVFXPref;
-    [SerializeField] private bool hasNoGravity;
+    [SerializeField] protected bool hasNoGravity;
 
 
-    void Start()
+    protected virtual void Start()
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
 
         SetRandomLook();
 
@@ -24,7 +26,7 @@ public class Fruit : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.GetComponent<Player>() != null)
         {

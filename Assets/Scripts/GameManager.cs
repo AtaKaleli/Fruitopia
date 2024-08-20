@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Managers")]
     [SerializeField] private AudioManager audioManager;
-
+    
 
     private void Awake()
     {
@@ -79,6 +79,7 @@ public class GameManager : MonoBehaviour
         
         CollectFruitsInfo();
         CreateManagerIfNeeded();
+        
     }
 
    

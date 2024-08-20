@@ -222,9 +222,12 @@ MonoBehaviour:
   moveSpeed: 7
   jumpForce: 15
   facingDirection: 1
+  canJump: 1
   knockBackTime: 0.5
   knockBackDirection: {x: 5, y: 10}
   untouchableTime: 1
+  canBeKnockable: 1
+  canBeRespawnable: 1
   groundCheck: {fileID: 4673688601604010822}
   groundCheckRadius: 0.73
   whatIsGround:
@@ -246,6 +249,7 @@ MonoBehaviour:
   - {fileID: 22100000, guid: 3f382c2675b763d468d3901cf1985e8e, type: 2}
   - {fileID: 22100000, guid: 768c6f9c922c563469d96955fc56297c, type: 2}
   - {fileID: 22100000, guid: 9bea19460c913fb4fb3721396ee3984f, type: 2}
+  fruitDroppedByPref: {fileID: 2058250022919463477, guid: 8e9840d4b40a1954cb69fe05361bdb25, type: 3}
 --- !u!95 &4673688601952692354
 Animator:
   serializedVersion: 5

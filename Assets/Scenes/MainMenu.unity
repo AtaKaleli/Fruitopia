@@ -7513,7 +7513,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7f9c617e365e684ea74f771bca8af74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  difficulty: 0
+  difficulty: 1
 --- !u!4 &1577739227
 Transform:
   m_ObjectHideFlags: 0
