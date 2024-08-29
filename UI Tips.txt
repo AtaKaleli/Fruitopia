@@ -1,0 +1,60 @@
+--- Animated Background ---
+
+1) Create grid for ground
+2) Create 3D object QUAD , and adjust it's Z position
+3) Create material, make it's shader : Unlit/Texture, drag it to QUAD
+4) Increase the scale of QUAD, also increase the tiling of material.
+5) Create a script and manage the offset and other textures.
+
+
+--- Animated Credits Screen --- 
+
+1) Create canvas, then create a gameObject as a child
+2) Under this gameObject, create Text UI element, and write something
+3) Add "Vertical Layout Group" to game object, and adjust the spacing
+4) Add skip button and handle other operations from script.
+
+
+--- Fade-in / Fade-Out Effect ---
+
+1) Create an image under the canvas, make it black,close raycast target and prefab for later usages.
+2) Create a script for this image and handle operations based on targetAlpha,duration and System.Action
+3) For fade-in, target alpha is 1, means make it darker, and for fade-out,target alpha is 0, means make it lighter
+4) for fade in operations, we need to use system.action, means make it dark, and once done, run the method
+5) for opening of scene, use fade out, for moving to new scene, use fade in
+
+
+--- UI Selection ---
+
+1) Different UI s are added under the canvas
+2) For each UI element group, have a parent called the "X_UI", and strech it fully.
+3) In script, create an array of gameObjects(UIs), and in a method, setactive to false to all UIs, 
+and to true the taken gameObject(UI) as a parameter
+
+
+--- Skin Selection ---
+
+1) Create animations for all skins with their animator override controller
+2) Assign base animator to animated override controller as parent
+3) Do operations in script for in game animations
+4) For menu, create a game object called MenuCharacter, and put an idle sprite with animator controller
+5) Create layers for other animations with using "sync", and drag the anims
+6) Control remaining operations from script
+
+
+--- Level Selection ---
+
+1) Create a scroll view, and delete the unnecssary components
+2) In the content, add "Grid Layout Group" and adjust child alignment to middle center
+3) In the contetn, add "Content size filter" to be able to scroll down.
+4) In Scroll view -> Scroll Rect, disable Horizontal to scroll only vertical. And make scroll sensivity 30
+5) Create script for both button and levelSelection
+6) In the level button script, implement loadLevel and setupButton
+7) In the levelselection script, implement createLevelButtons function (instantiate levelbutton and call setup method of it)
+8) In the gamemanager, take the currentsceneindex, and implement loadnextlevel,loadtheendscene in levelfinished
+
+
+
+
+
+

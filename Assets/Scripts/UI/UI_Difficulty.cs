@@ -24,4 +24,8 @@ public class UI_Difficulty : MonoBehaviour
     {
         difficultyManager.SetDifficuilty(DifficultyType.Hard);
     }
+    public void SetImpossibleMode()
+    {
+        difficultyManager.SetDifficuilty(DifficultyType.Impossible);
+    }
 }

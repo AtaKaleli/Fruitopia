@@ -123,7 +123,7 @@ public class Player : MonoBehaviour
             Move(1.0f);
         }
 
-        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space))
         {
             if (!canJump)
                 return;
@@ -147,8 +147,6 @@ public class Player : MonoBehaviour
     public void Damage()
     {
         
-        
-
         if(gameDifficulty == DifficultyType.Normal)
         {
             if(gameManager.GetFruitsCollected() <= 0)
@@ -167,11 +165,18 @@ public class Player : MonoBehaviour
             return;
         }
 
-        if(gameDifficulty == DifficultyType.Hard && canBeRespawnable)
+        else if(gameDifficulty == DifficultyType.Hard && canBeRespawnable)
         {
             canBeRespawnable = false;
             Die();
             GameManager.instance.RespawnPlayer(1f);
+            
+        }
+
+        else if(gameDifficulty == DifficultyType.Impossible)
+        {
+            Die();
+            GameManager.instance.RestartLevel();
         }
     }
     private void InputChecks()
@@ -253,6 +258,7 @@ public class Player : MonoBehaviour
                 if (rb.velocity.y <= 0.1f)
                 {
                     AudioManager.instance.PlaySFX(2);
+                    
                     enemy.Damage();
                     Jump(jumpForce);
                 }

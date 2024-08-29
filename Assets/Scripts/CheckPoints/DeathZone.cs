@@ -15,6 +15,10 @@ public class DeathZone : MonoBehaviour
             GameManager.instance.RespawnPlayer(1f);
 
         }
+        else
+        {
+            Destroy(collision.gameObject);
+        }
 
 
     }

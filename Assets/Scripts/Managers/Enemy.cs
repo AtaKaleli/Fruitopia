@@ -13,7 +13,7 @@ public class Enemy : Damage
     [SerializeField] protected float idleTime;
     protected float idleTimeCounter;
     protected bool isAggressive;
-    protected bool canMove = true;
+    public bool canMove = true;
 
     [HideInInspector]public bool isInvincible;
     
@@ -53,9 +53,16 @@ public class Enemy : Damage
         }
 
         if (idleTimeCounter < 0 && canMove)
+        {
+            
             Move(moveSpeed * facingDirection, rb.velocity.y);
+
+        }
         else
+        {
+           
             Move(0, 0);
+        }
     }
 
     
@@ -86,10 +93,11 @@ public class Enemy : Damage
 
     public void DestroyMe()
     {
-        if(rb != null)
-            rb.velocity = new Vector2(0, 0);
+        moveSpeed = 0;
         Destroy(gameObject);
     }
+
+    
 
     public virtual void Damage()
     {

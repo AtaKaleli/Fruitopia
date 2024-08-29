@@ -14,6 +14,7 @@ public class Pig : Enemy
 
     void Update()
     {
+        
         aggressiveTimeCounter -= Time.deltaTime;
 
         
@@ -32,7 +33,8 @@ public class Pig : Enemy
 
     private void AggressiveWalk()
     {
-        Move(2 * moveSpeed * facingDirection, rb.velocity.y);
+        if(canMove)
+            Move(2 * moveSpeed * facingDirection, rb.velocity.y);
 
         if (isWallDetected || !isGrounded)
             Flip();

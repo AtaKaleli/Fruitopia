@@ -3144,6 +3144,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4188737223790905856, guid: dc5d4936f4958db429453ff9a1d6bd72, type: 3}
+      propertyPath: backgroundColors
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4188737223790905857, guid: dc5d4936f4958db429453ff9a1d6bd72, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -3502,6 +3506,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3403399859174748837, guid: d6e36af99525534489690d2171a420c9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3403399859411250420, guid: d6e36af99525534489690d2171a420c9, type: 3}
       propertyPath: m_Pivot.x
       value: 0

@@ -1,7 +1,7 @@
 using UnityEngine;
 
 
-public enum DifficultyType { Easy = 1, Normal, Hard }
+public enum DifficultyType { Easy = 1, Normal, Hard, Impossible }
 
 
 public class DifficultyManager : MonoBehaviour
