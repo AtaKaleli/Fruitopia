@@ -14,6 +14,9 @@ public class UI_Ingame : MonoBehaviour
     [SerializeField] private TextMeshProUGUI fruitText;
 
     [SerializeField] private GameObject pauseUI;
+    [SerializeField] private GameObject pauseScreen;
+    [SerializeField] private GameObject settingsUI;
+
 
     public bool isPaused;
 
@@ -51,6 +54,8 @@ public class UI_Ingame : MonoBehaviour
         {
             isPaused = true;
             pauseUI.SetActive(true);
+            pauseScreen.SetActive(true);
+            settingsUI.SetActive(false);
             Time.timeScale = 0;
         }
     }
@@ -73,6 +78,18 @@ public class UI_Ingame : MonoBehaviour
     public void RestartLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void LoadSettingsScreen()
+    {
+        pauseScreen.SetActive(false);
+        settingsUI.SetActive(true);
+    }
+
+    public void BackToPauseScreen()
+    {
+        settingsUI.SetActive(false);
+        pauseScreen.SetActive(true);
     }
 
 }

@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour
         
         
         CollectFruitsInfo();
-        CreateManagerIfNeeded();
+    
         
     }
 
@@ -95,11 +95,6 @@ public class GameManager : MonoBehaviour
         inGameUI.UpdateTimer(levelTimer);
     }
 
-
-    private void CreateManagerIfNeeded()
-    {
-        
-    }
 
     private void CollectFruitsInfo()
     {

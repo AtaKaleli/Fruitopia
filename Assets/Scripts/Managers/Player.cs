@@ -41,6 +41,7 @@ public class Player : MonoBehaviour
     public bool canBeRespawnable = true;
 
 
+
     [Header("Collision Checks - Ground")]
     [SerializeField] private Transform groundCheck;
     [SerializeField] private float groundCheckRadius;
@@ -75,6 +76,8 @@ public class Player : MonoBehaviour
 
     [Header("FruitDrop")]
     [SerializeField] private GameObject fruitDroppedByPref;
+
+
 
 
     void Start()
@@ -258,9 +261,11 @@ public class Player : MonoBehaviour
                 if (rb.velocity.y <= 0.1f)
                 {
                     AudioManager.instance.PlaySFX(2);
-                    
                     enemy.Damage();
                     Jump(jumpForce);
+                    SaveStatsManager.instance.SaveEnemiesKilledStat();
+
+
                 }
             }
             else if (hitCollider.GetComponent<Box>() != null)
@@ -358,6 +363,7 @@ public class Player : MonoBehaviour
     IEnumerator KnockbackController()
     {
         AudioManager.instance.PlaySFX(0);
+        SaveStatsManager.instance.SaveKnockedAmountStat();
         isKnocked = true;
         canBeKnockable = false;
         anim.SetTrigger("isKnocked");

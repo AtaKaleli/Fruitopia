@@ -10,7 +10,7 @@ public class Fruit : MonoBehaviour
 
     [SerializeField] private GameObject collectedVFXPref;
     [SerializeField] protected bool hasNoGravity;
-
+    private int collectedFruits;
 
     protected virtual void Start()
     {
@@ -30,6 +30,7 @@ public class Fruit : MonoBehaviour
     {
         if(collision.GetComponent<Player>() != null)
         {
+            SaveStatsManager.instance.SaveFruitsCollectedStat();
             AudioManager.instance.PlaySFX(8);
             GameManager.instance.AddFruit();
             Destroy(gameObject);

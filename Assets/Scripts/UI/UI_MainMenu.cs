@@ -49,6 +49,9 @@ public class UI_MainMenu : MonoBehaviour
         fadeEffect.ScreenFade(1, 1.5f, LoadTheCreditsScene);
     }
 
+    
+
+
     private void LoadTheCreditsScene()
     {
         SceneManager.LoadScene("Credits");
@@ -79,6 +82,12 @@ public class UI_MainMenu : MonoBehaviour
         fadeEffect.ScreenFade(1, 1.5f, LoadContinueLevel);
         
     }
+
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
+
 
     public void LoadContinueLevel()
     {
