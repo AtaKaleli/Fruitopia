@@ -78,7 +78,8 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject fruitDroppedByPref;
 
 
-
+    private Joystick joystick;
+    
 
     void Start()
     {
@@ -86,6 +87,10 @@ public class Player : MonoBehaviour
         
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        joystick = FindObjectOfType<Joystick>();
+
+        //if(Application.isMobilePlatform)
+        FindObjectOfType<UI_JumpButton>().UpdatePlayerRef(this);
         
         UpdateGameDifficulty();
         UpdateSkin();
@@ -184,9 +189,25 @@ public class Player : MonoBehaviour
     }
     private void InputChecks()
     {
-         verticalInput = Input.GetAxis("Vertical");
-         horizontalInput = Input.GetAxisRaw("Horizontal");
+        /*
+        if (Application.isMobilePlatform)
+        {
+            // Use joystick input for mobile devices
+            verticalInput = joystick.Vertical;
+            horizontalInput = joystick.Horizontal;
+        }
+        else
+        {
+            // Use keyboard input for PC
+            verticalInput = Input.GetAxis("Vertical");
+            horizontalInput = Input.GetAxisRaw("Horizontal");
+        }*/
+
+        verticalInput = joystick.Vertical;
+        horizontalInput = joystick.Horizontal;
     }
+
+    
 
     private void UpdateGameDifficulty()
     {
@@ -216,9 +237,9 @@ public class Player : MonoBehaviour
         
     }
 
-    private void JumpController()
+    public void JumpController()
     {
-        if (isWallSliding || isGrounded || cayoteJumpCounter > 0)
+        if (isWallSliding || isGrounded || canHaveCayoteJump)
         {
             Jump(jumpForce);
         }
@@ -234,6 +255,9 @@ public class Player : MonoBehaviour
         AudioManager.instance.PlaySFX(3);
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
     }
+
+    
+
 
     private void CollisionChecks()
     {
