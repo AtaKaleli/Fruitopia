@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,19 +8,21 @@ public class UI_MainMenu : MonoBehaviour
     [SerializeField] private GameObject continueButton;
 
     [SerializeField] private UI_Settings[] volumeController;
+    private bool firstPlay;
 
     private void Awake()
     {
         SetEnableContinueButton();
         fadeEffect = GetComponentInChildren<UI_FadeEffect>();
-        AudioManager.instance.PlayBGM(0);
+
+
 
         /*
         Application.targetFrameRate = 60; // for optimization (spped ups game)
         QualitySettings.vSyncCount = 0;
         Screen.SetResolution(Screen.width, Screen.height, FullScreenMode.FullScreenWindow, 60); // for optimization*/
-    }
 
+    }
     private void Start()
     {
         for (int i = 0; i < volumeController.Length; i++)
@@ -35,15 +35,15 @@ public class UI_MainMenu : MonoBehaviour
 
     public void SwitchToNewGame()
     {
-        
+
         fadeEffect.ScreenFade(1, 1.5f, NewGame);
-        
+
     }
 
     private void NewGame()
     {
         SceneManager.LoadScene("Level_1");
-        
+
     }
 
     public void SwitchToCredits()
@@ -52,7 +52,7 @@ public class UI_MainMenu : MonoBehaviour
         fadeEffect.ScreenFade(1, 1.5f, LoadTheCreditsScene);
     }
 
-    
+
 
 
     private void LoadTheCreditsScene()
@@ -67,7 +67,7 @@ public class UI_MainMenu : MonoBehaviour
             ui.SetActive(false);
         }
         UI_Element.SetActive(true);
-        AudioManager.instance.PlaySFX(4,false);
+        AudioManager.instance.PlaySFX(4, false);
     }
 
     private void SetEnableContinueButton()
@@ -81,9 +81,9 @@ public class UI_MainMenu : MonoBehaviour
 
     public void SwitchToContinueLevel()
     {
-       
+
         fadeEffect.ScreenFade(1, 1.5f, LoadContinueLevel);
-        
+
     }
 
     public void ExitGame()
@@ -101,6 +101,6 @@ public class UI_MainMenu : MonoBehaviour
         SceneManager.LoadScene("Level_" + lastContinueLevelIndex);
     }
 
-    
+
 
 }
