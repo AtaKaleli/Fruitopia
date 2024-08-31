@@ -170,7 +170,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 609, y: 413}
+  m_AnchoredPosition: {x: 572, y: 391}
   m_SizeDelta: {x: 164.5285, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2095841038
@@ -644,7 +644,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -773, y: 446}
+  m_AnchoredPosition: {x: -667, y: 374}
   m_SizeDelta: {x: 159.6889, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1655681349348449130
@@ -681,7 +681,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 850.87115, y: 448.00003}
+  m_AnchoredPosition: {x: 746, y: 391}
   m_SizeDelta: {x: 138.6377, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1655681349395381248
@@ -697,7 +697,6 @@ GameObject:
   - component: {fileID: 1655681349395381759}
   - component: {fileID: 1655681349395381758}
   - component: {fileID: 1655681349395381249}
-  - component: {fileID: 199863446407456500}
   m_Layer: 5
   m_Name: UI_InGame
   m_TagString: Untagged
@@ -813,21 +812,6 @@ MonoBehaviour:
   pauseScreen: {fileID: 4161721096162726895}
   settingsUI: {fileID: 4161721097504471612}
   isPaused: 0
---- !u!114 &199863446407456500
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1655681349395381248}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2e54a0b53f798b41af0829d9b69645d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  joystick: {fileID: 872857763634768296}
-  jumpButton: {fileID: 4161721097869282370}
-  pauseButton: {fileID: 2095841034}
 --- !u!1 &1655681349523293787
 GameObject:
   m_ObjectHideFlags: 0
@@ -4913,11 +4897,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec536a7718376554185e4a856d5ae230, type: 3}
---- !u!1 &872857763634768296 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3881087803549984437, guid: ec536a7718376554185e4a856d5ae230, type: 3}
-  m_PrefabInstance: {fileID: 4161721096251821853}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &872857763634768297 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3881087803549984436, guid: ec536a7718376554185e4a856d5ae230, type: 3}

@@ -1,15 +1,14 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
 
-    
+
 
     private DifficultyType gameDifficulty;
     private GameManager gameManager;
-   
+
 
     private Rigidbody2D rb;
     private Animator anim;
@@ -72,32 +71,32 @@ public class Player : MonoBehaviour
     [SerializeField] private int skinID;
     //we used animatorOverrideController for skin selection.It allows to override different animations of player
     [SerializeField] private AnimatorOverrideController[] animators;
-    
+
 
     [Header("FruitDrop")]
     [SerializeField] private GameObject fruitDroppedByPref;
 
 
     private Joystick joystick;
-    
+
 
     void Start()
     {
         gameManager = GameManager.instance;
-        
+
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         joystick = FindObjectOfType<Joystick>();
 
-        if(Application.isMobilePlatform)
-            FindObjectOfType<UI_JumpButton>().UpdatePlayerRef(this);
-        
+
+        FindObjectOfType<UI_JumpButton>().UpdatePlayerRef(this);
+
         UpdateGameDifficulty();
         UpdateSkin();
         StartingPoint();
     }
 
-    
+
 
     void Update()
     {
@@ -111,7 +110,7 @@ public class Player : MonoBehaviour
 
         if ((isGrounded || isWallSliding) && !walkingSandMudIce)
         {
-            
+
             canDoubleJump = true;
             canMove = true;
             canJump = true;
@@ -145,7 +144,7 @@ public class Player : MonoBehaviour
         FlipController();
         AnimationController();
 
-        
+
     }
 
     private void StartingPoint()
@@ -154,12 +153,12 @@ public class Player : MonoBehaviour
     }
     public void Damage()
     {
-        
-        if(gameDifficulty == DifficultyType.Normal)
+
+        if (gameDifficulty == DifficultyType.Normal)
         {
-            if(gameManager.GetFruitsCollected() <= 0)
+            if (gameManager.GetFruitsCollected() <= 0)
             {
-                
+
                 Die();
                 GameManager.instance.RespawnPlayer(1f);
 
@@ -169,19 +168,19 @@ public class Player : MonoBehaviour
                 Instantiate(fruitDroppedByPref, transform.position, Quaternion.identity);
                 gameManager.RemoveFruit();
             }
-            
+
             return;
         }
 
-        else if(gameDifficulty == DifficultyType.Hard && canBeRespawnable)
+        else if (gameDifficulty == DifficultyType.Hard && canBeRespawnable)
         {
             canBeRespawnable = false;
             Die();
             GameManager.instance.RespawnPlayer(1f);
-            
+
         }
 
-        else if(gameDifficulty == DifficultyType.Impossible)
+        else if (gameDifficulty == DifficultyType.Impossible)
         {
             Die();
             GameManager.instance.RestartLevel();
@@ -189,24 +188,17 @@ public class Player : MonoBehaviour
     }
     private void InputChecks()
     {
-        
-        if (Application.isMobilePlatform)
-        {
-            // Use joystick input for mobile devices
-            verticalInput = joystick.Vertical;
-            horizontalInput = joystick.Horizontal;
-        }
-        else
-        {
-            // Use keyboard input for PC
-            verticalInput = Input.GetAxis("Vertical");
-            horizontalInput = Input.GetAxisRaw("Horizontal");
-        }
 
-        
+
+        // Use joystick input for mobile devices
+        verticalInput = joystick.Vertical;
+        horizontalInput = joystick.Horizontal;
+
+
+
     }
 
-    
+
 
     private void UpdateGameDifficulty()
     {
@@ -230,10 +222,10 @@ public class Player : MonoBehaviour
 
     private void Move(float speedMultiplier)
     {
-        
+
         rb.velocity = new Vector2(horizontalInput * moveSpeed * speedMultiplier, rb.velocity.y);
 
-        
+
     }
 
     public void JumpController()
@@ -255,7 +247,7 @@ public class Player : MonoBehaviour
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
     }
 
-    
+
 
 
     private void CollisionChecks()
@@ -324,7 +316,7 @@ public class Player : MonoBehaviour
 
         if (verticalInput < 0)
         {
-            
+
             isWallSliding = false;
         } // if player pressed S , which means go down, then the wall sliding is interrupted
 
@@ -367,7 +359,7 @@ public class Player : MonoBehaviour
     }
 
     public void SetCanMove(bool status) => canMove = status;
-    
+
     public void Die()
     {
         AudioManager.instance.PlaySFX(0);

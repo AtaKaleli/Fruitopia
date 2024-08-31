@@ -17,10 +17,10 @@ public class UI_MainMenu : MonoBehaviour
 
 
 
-        /*
+        
         Application.targetFrameRate = 60; // for optimization (spped ups game)
         QualitySettings.vSyncCount = 0;
-        Screen.SetResolution(Screen.width, Screen.height, FullScreenMode.FullScreenWindow, 60); // for optimization*/
+        //Screen.SetResolution(Screen.width, Screen.height, FullScreenMode.FullScreenWindow, 60); // for optimization*/
 
     }
     private void Start()
