@@ -89,8 +89,8 @@ public class Player : MonoBehaviour
         anim = GetComponent<Animator>();
         joystick = FindObjectOfType<Joystick>();
 
-        //if(Application.isMobilePlatform)
-        FindObjectOfType<UI_JumpButton>().UpdatePlayerRef(this);
+        if(Application.isMobilePlatform)
+            FindObjectOfType<UI_JumpButton>().UpdatePlayerRef(this);
         
         UpdateGameDifficulty();
         UpdateSkin();
@@ -189,7 +189,7 @@ public class Player : MonoBehaviour
     }
     private void InputChecks()
     {
-        /*
+        
         if (Application.isMobilePlatform)
         {
             // Use joystick input for mobile devices
@@ -201,10 +201,9 @@ public class Player : MonoBehaviour
             // Use keyboard input for PC
             verticalInput = Input.GetAxis("Vertical");
             horizontalInput = Input.GetAxisRaw("Horizontal");
-        }*/
+        }
 
-        verticalInput = joystick.Vertical;
-        horizontalInput = joystick.Horizontal;
+        
     }
 
     

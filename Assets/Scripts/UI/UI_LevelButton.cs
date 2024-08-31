@@ -30,7 +30,7 @@ public class UI_LevelButton : MonoBehaviour
     public void LoadLevel()
     {
         AudioManager.instance.PlaySFX(4, false);
-
+        //AudioManager.instance.StopBGM();
         int difficultyIndex = ((int)DifficultyManager.instance.difficulty);
         PlayerPrefs.SetInt("GameDifficulty", difficultyIndex);
         SceneManager.LoadScene(levelName);

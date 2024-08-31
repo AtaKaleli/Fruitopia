@@ -20,20 +20,17 @@ public class AudioManager : MonoBehaviour
             instance = this;
         else
             Destroy(this.gameObject);
-        /*
+        
         if (bgm.Length <= 0)
-            return;*/
+            return;
 
-        //InvokeRepeating(nameof(PlayMusicIfNeeded), 0, 2);
+        InvokeRepeating(nameof(PlayMusicIfNeeded), 0, 0.25f);
     }
 
-  
 
-
-    /*
     public void PlayRandomBGM()
     {
-        currentBGMIndex = Random.Range(0, bgm.Length);
+        currentBGMIndex = Random.Range(1, bgm.Length);
         PlayBGM(currentBGMIndex);
     }
 
@@ -55,7 +52,8 @@ public class AudioManager : MonoBehaviour
         }
         currentBGMIndex = bgmIndex;
         bgm[bgmIndex].Play();
-    }*/
+    }
+    
 
     public void PlaySFX(int sfxIndex, bool randomPitch = true)
     {
@@ -71,6 +69,11 @@ public class AudioManager : MonoBehaviour
     public void StopSFX(int sfxIndex)
     {
         sfx[sfxIndex].Stop();
+    }
+    
+    public void StopBGM()
+    {
+        bgm[currentBGMIndex].Stop();
     }
 
 

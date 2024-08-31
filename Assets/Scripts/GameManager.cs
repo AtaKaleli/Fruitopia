@@ -148,6 +148,7 @@ public class GameManager : MonoBehaviour
   
     private void LoadCurrentScene()
     {
+        
         SceneManager.LoadScene("Level_" + currentLevelIndex);
     }
     private void LoadTheEndScene()
@@ -157,6 +158,7 @@ public class GameManager : MonoBehaviour
 
     private void LoadNextLevel()
     {
+        AudioManager.instance.StopBGM();
         SceneManager.LoadScene("Level_" + nextLevelIndex);
     }
 
